@@ -14,6 +14,8 @@ public interface BrandDao extends JpaRepository<Brand, Integer>{
 	//brand operasyonları içerir
 	
 	List<ListBrandDto> getByName(String name); //brand deki name leri getirir
+
+	boolean existsBrandByName(String lowerCase);
 }
 
 

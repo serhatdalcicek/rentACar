@@ -26,17 +26,22 @@ public class BrandManager implements BrandService {
 	@Override
 	
 	public void add(CreateBrandRequest createBrandRequest) {
+			
+		   createBrandRequest.setName(createBrandRequest.getName().toLowerCase()); //toLowerCase = büyük harfleri küçük harfe çevirir
+		   
+	        if (!(brandDao.existsBrandByName(createBrandRequest.getName().toLowerCase()))) { //exist = belirtilen dizin adresinde dosyanın var olup olmadığının karşılığını boolean veri tipinde bizlere verir.
+	        	
+	            Brand brand = this.modelMapperService.forRequest()
+	            		.map(createBrandRequest, Brand.class);
+	                    
+	            this.brandDao.save(brand);
+	        }
+	        else{
+	        	
+	            throw new RuntimeException("Bu marka daha önce kaydedilmiştir :/ "); //hata mesajı tanımlaması
+	        }
+	    }
 		
-		//createBrandRequest.setName(createBrandRequest.getName().toLowerCase());
-	
-		if(brandDao.getByName(createBrandRequest.getName()).size()==0) {
-			
-			Brand brand = this.modelMapperService.forRequest()
-					
-			.map(createBrandRequest, Brand.class);
-			
-			this.brandDao.save(brand);
-		}
 		
 			
 	
@@ -46,7 +51,7 @@ public class BrandManager implements BrandService {
 		//Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
 		//this.brandDao.save(brand);
 
-	}
+	
 
 	@Override
 	public List<ListBrandDto> getAll() {

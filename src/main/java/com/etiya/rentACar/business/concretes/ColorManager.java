@@ -38,14 +38,20 @@ public class ColorManager implements ColorService {
 	@Override
 	public void add(CreateColorRequest createColorRequest) {
 		
-		if(this.colorDao.getByName(createColorRequest.getColorName()).size()==0){
-			
-            Color color=this.modelMapperService.forRequest()
-            .map(createColorRequest,Color.class);
+		createColorRequest.setColorName(createColorRequest.getColorName().toLowerCase()); //toLowerCase = büyük harfleri küçük harfe çevirir
+		
+        if (!colorDao.existsColorByName(createColorRequest.getColorName().toLowerCase())) { //! = değilse anlamına gelir //exitsts=belirtilen dizin adresinde dosyanın var olup olmadığının karşılığını boolean veri tipinde bizlere verir.
+        	
+            Color color = this.modelMapperService.forRequest()
+            		.map(createColorRequest, Color.class);
             
-            colorDao.save(color);
-		}
-	}
+            this.colorDao.save(color);
+            
+        } else {
+        	
+            throw new RuntimeException("Bu renk daha önce kaydedilmiştir :/"); //hata mesajı tanımlaması 
+        }
+    }
 
 
 

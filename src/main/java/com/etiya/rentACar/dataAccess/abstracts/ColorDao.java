@@ -12,4 +12,6 @@ import com.etiya.rentACar.entities.Color;
 public interface ColorDao extends JpaRepository<Color, Integer>{
   
 	List<ListColorDto> getByName(String name);
+
+	boolean existsColorByName(String lowerCase);
 }

@@ -8,11 +8,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListCarDto {
+	
 private int id;
+
 private double dailyPrice;
+
 private String description;
-private double modelYear;
+
+private int modelYear;
+
 private String brandName;
+
 private String colorName;
 
 }

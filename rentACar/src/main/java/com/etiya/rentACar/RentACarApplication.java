@@ -32,3 +32,5 @@ public class RentACarApplication {
 //bir markanın bir den çok arabası olursa OneToMany
 //bir arabanın bir markası olabileceği için ManyToOne
 //manytomany çoka çok birden fazla araba birden fazla kaza gibi
+
+//@JsonIgnore görünmez yapar 

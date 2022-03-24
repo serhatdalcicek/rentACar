@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.ColorService;
@@ -32,9 +33,16 @@ public class DamagesController {
 	public List<ListDamageDto> getAll(){
 		return this.damageService.getAll();
 	}
-	@GetMapping("/getall/{id}")
-	public List<ListDamageDto> getByCarId(int id){
+	@GetMapping("/getbycarid")
+	public List<ListDamageDto> getByCarId(@RequestParam("carId") int id){
 		return this.damageService.getByCarId(id);
 	}
-	
+	@GetMapping("/getallpaged")
+	 public List<ListDamageDto> getAllPaged(int pageNo,int pageSize){
+		return this.damageService.getAllPaged(pageNo ,pageSize);
+	}
+	@GetMapping("/getallsorted")
+	 public  List<ListDamageDto> getAllSorted(String option,String fields){
+		return this.damageService.getAllSorted(option,fields);
+	}
 }

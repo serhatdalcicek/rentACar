@@ -30,7 +30,7 @@ public class Damage {
 	private int id;
 	
 	@Column(name = "date")
-	private String date;
+	private int date;
 	
 	@Column(name = "description")
 	private String description;

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListBrandDto {
+	
 	private int id;
+	
 	private String name;
 }

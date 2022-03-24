@@ -3,16 +3,23 @@ package com.etiya.rentACar.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.ColorService;
 import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
 import com.etiya.rentACar.business.responses.brandResponses.ListBrandDto;
+import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
+import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.ColorDao;
 import com.etiya.rentACar.entities.Brand;
+import com.etiya.rentACar.entities.Car;
 import com.etiya.rentACar.entities.Color;
+import com.etiya.rentACar.entities.Damage;
 
 @Service
 public class ColorManager implements ColorService {
@@ -31,19 +38,52 @@ public class ColorManager implements ColorService {
 	@Override
 	public void add(CreateColorRequest createColorRequest) {
 		
-		Color color = this.modelMapperService.forRequest().map(createColorRequest, Color.class);
+		createColorRequest.setColorName(createColorRequest.getColorName().toLowerCase());
 		
-		this.colorDao.save(color);
-	}
+        if (!colorDao.existsColorByName(createColorRequest.getColorName().toLowerCase())) { //! = değilse anlamına gelir //exitsts=belirtilen dizin adresinde dosyanın var olup olmadığının karşılığını boolean veri tipinde bizlere verir.
+        	
+            Color color = this.modelMapperService.forRequest()
+            		.map(createColorRequest, Color.class);
+            
+            this.colorDao.save(color);
+            
+        } else {
+        	
+            throw new RuntimeException("Bu renk daha önce kaydedilmiştir :/");
+        }
+    }
 
 
 
 	@Override
 	public List<ListColorDto> getAll() {
+		
 		  List<Color> colors = this.colorDao.findAll();
-	        List<ListColorDto> response = colors.stream().map(color -> this.modelMapperService.forDto()
+		  
+	        List<ListColorDto> response = colors.stream()
+	        		
+	        		.map(color -> this.modelMapperService.forDto()
 	        		.map(color,ListColorDto.class)).collect(Collectors.toList());
+	       
 	        return response;
 	}
+	@Override
+	public List<ListColorDto> getAllPaged(int pageNo, int pageSize) { //sayfalar
+		
+       Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+       
+	List<Color> colors = this.colorDao.findAll(pageable).getContent();
+	
+	 List<ListColorDto> response = colors.stream()
+			 
+			 .map(color -> this.modelMapperService.forDto()
+			 .map(color,ListColorDto.class)).collect(Collectors.toList());
+       
+	 return response;
+	}
 
-}
+
+
+	}
+
+

@@ -9,4 +9,7 @@ public interface ColorService {
  void add(CreateColorRequest createColorRequest);
 
 List<ListColorDto> getAll();
+
+List<ListColorDto> getAllPaged(int pageNo, int pageSize);
+
 }

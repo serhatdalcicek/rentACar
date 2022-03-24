@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class ListDamageDto {
+	
+   
    private int id;
    
+   private int carId;
    
-   private String date;
+   private int date;
    
    private String description;
-   
-   private int carId;
-
    
    private String carDescription;
    

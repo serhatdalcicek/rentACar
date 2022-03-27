@@ -35,9 +35,8 @@ public class BrandManager implements BrandService {
 
 		checkIfIsBrandName(createBrandRequest.getBrandName());
 		
-		
-		
-		Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
+		Brand brand = this.modelMapperService.forRequest()
+				.map(createBrandRequest, Brand.class);
 
 		this.brandDao.save(brand);
 	}
@@ -55,7 +54,8 @@ public class BrandManager implements BrandService {
 
 		List<ListBrandDto> response = brands.stream()
 
-				.map(brand -> this.modelMapperService.forDto().map(brand, ListBrandDto.class))
+				.map(brand -> this.modelMapperService.forDto()
+				.map(brand, ListBrandDto.class))
 				.collect(Collectors.toList());
 
 		return response;

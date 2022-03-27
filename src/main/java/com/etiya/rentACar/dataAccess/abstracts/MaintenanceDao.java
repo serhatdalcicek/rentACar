@@ -14,5 +14,7 @@ public interface MaintenanceDao extends JpaRepository<Maintenance, Integer> {
 	
 
 	boolean existsMaintenanceByCarId(int carId);
+	
+	List<Maintenance> getByMaintenanceId(int id);
 
 }

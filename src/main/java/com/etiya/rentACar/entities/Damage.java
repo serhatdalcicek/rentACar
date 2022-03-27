@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "damages")
 public class Damage {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	

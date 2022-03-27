@@ -2,6 +2,8 @@ package com.etiya.rentACar.business.responses.maintenanceResponses;
 
 import java.time.LocalDate;
 
+import com.etiya.rentACar.entities.Situations;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,8 @@ public class ListMaintenanceDto {
     private String statusName;
     
     private int statusId;
+    
+    private Situations situations;
 
 
 }

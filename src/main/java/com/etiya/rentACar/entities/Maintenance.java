@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,8 +38,7 @@ public class Maintenance {
 	@Column(name = "dateReturned")
 	private LocalDate dateReturned;
 
-	 @OneToOne
-	 @JoinColumn(name="statusId")
-	 private Status statusName;
+	@Column(name = "situations")  //situations = durumlar demektir
+	private Situations situations;
 
 }

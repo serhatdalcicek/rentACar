@@ -51,7 +51,9 @@ public class CarManager implements CarService {
 
 		List<ListCarDto> response = cars.stream()
 
-				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+				.map(car -> this.modelMapperService.forDto()
+				.map(car, ListCarDto.class))
+				.collect(Collectors.toList());
 
 		return response;
 	}
@@ -63,7 +65,9 @@ public class CarManager implements CarService {
 
 		List<ListCarDto> response = cars.stream()
 
-				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+				.map(car -> this.modelMapperService.forDto()
+				.map(car, ListCarDto.class))
+				.collect(Collectors.toList());
 
 		return response;
 
@@ -78,7 +82,9 @@ public class CarManager implements CarService {
 
 		List<ListCarDto> response = cars.stream()
 
-				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+				.map(car -> this.modelMapperService.forDto()
+				.map(car, ListCarDto.class))
+				.collect(Collectors.toList());
 
 		return response;
 	}

@@ -2,6 +2,7 @@ package com.etiya.rentACar.business.requests.maintenanceRequests;
 
 import java.time.LocalDate;
 
+import com.etiya.rentACar.entities.Situations;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,9 @@ public class CreateMaintenanceRequest {
 	private int carId;
 	
 	private int statusId;
+	
+	@JsonIgnore
+	private Situations situations = Situations.Maintenance;
 
 	
 }

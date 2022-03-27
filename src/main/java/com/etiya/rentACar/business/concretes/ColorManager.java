@@ -32,7 +32,8 @@ public class ColorManager implements ColorService {
 		checkIfIsColorName(createColorRequest.getColorName());
 		
 
-		Color color = this.modelMapperService.forRequest().map(createColorRequest, Color.class);
+		Color color = this.modelMapperService.forRequest()
+				.map(createColorRequest, Color.class);
 
 		this.colorDao.save(color);
 
@@ -45,7 +46,8 @@ public class ColorManager implements ColorService {
 
 		List<ListColorDto> response = colors.stream()
 
-				.map(color -> this.modelMapperService.forDto().map(color, ListColorDto.class))
+				.map(color -> this.modelMapperService.forDto()
+				.map(color, ListColorDto.class))
 				.collect(Collectors.toList());
 
 		return response;
@@ -60,7 +62,8 @@ public class ColorManager implements ColorService {
 
 		List<ListColorDto> response = colors.stream()
 
-				.map(color -> this.modelMapperService.forDto().map(color, ListColorDto.class))
+				.map(color -> this.modelMapperService.forDto()
+				.map(color, ListColorDto.class))
 				.collect(Collectors.toList());
 
 		return response;

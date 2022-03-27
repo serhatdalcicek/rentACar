@@ -21,6 +21,7 @@ public class Status {
 	
 	@Id // Id alanı olduğunu belirtmek için.
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Otomatik artan alanı belirtmek.
+	
 	@Column(name="statusId") // Veritabanında karşılık geldiği alan.
 	private int statusId;
 	

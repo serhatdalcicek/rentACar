@@ -46,27 +46,27 @@ public class StatusManager implements StatusService{
 
 	@Override
 	public List<ListStatusDto> getAll() {
-		
+
 		List<Status> statuses = this.statusDao.findAll();
-		
+
 		List<ListStatusDto> response = statuses.stream()
-				
-				.map(status -> modelMapperService.forDto().map(status, ListStatusDto.class))
+
+				.map(status -> this.modelMapperService.forDto()
+				.map(status, ListStatusDto.class))
 				.collect(Collectors.toList());
-		
+
 		return response;
 	}
+	
 	@Override
 	public List<ListStatusDto> getByStatusId(int id) {
-
-		List<Status> statuses = this.statusDao.getByStatusId(id);
-
-		List<ListStatusDto> response = statuses.stream()
-				.map(status -> this.modelMapperService.forDto().map(statuses, ListStatusDto.class))
-				.collect(Collectors.toList());
 		
+		List<Status> statuses = this.statusDao.getByStatusId(id);
+		
+		List<ListStatusDto> response = statuses.stream()
+				.map(status -> this.modelMapperService.forDto()
+				.map(status, ListStatusDto.class)) //s takısına dikkat et
+				.collect(Collectors.toList());
 		return response;
-
 	}
-
 }

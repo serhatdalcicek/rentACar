@@ -22,6 +22,7 @@ public class ListDamageDto {
     private LocalDate date;
     
     private String description;
+  
    
   
    }

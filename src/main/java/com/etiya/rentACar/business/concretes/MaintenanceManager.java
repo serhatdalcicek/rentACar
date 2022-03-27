@@ -25,9 +25,9 @@ public class MaintenanceManager implements MaintenanceService {
 	}
 
 	 @Override
-	    public void add(CreateMaintenanceRequest createMaintenanceRequest, Situations situations) {
+	    public void add(CreateMaintenanceRequest createMaintenanceRequest, Situations situations) {//
 
-	        checkIfCarId(createMaintenanceRequest.getCarId(), situations);
+	        checkIfCarId(createMaintenanceRequest.getCarId(), situations); //
 	        Maintenance maintenance = modelMapperService.forRequest()
 	                .map(createMaintenanceRequest, Maintenance.class);
 	        maintenanceDao.save(maintenance);
@@ -73,9 +73,9 @@ public class MaintenanceManager implements MaintenanceService {
 
 	
 
-	   private void checkIfCarId(int carId, Situations situations) {
+	   private void checkIfCarId(int carId,Situations situations) { // 
 		   
-	        if (maintenanceDao.existsMaintenanceByCarId(carId) && situations == Situations.Available) {
+	        if (maintenanceDao.existsMaintenanceByCarId(carId)&& situations == Situations.Available) { // 
 
 	            throw new RuntimeException("Bu araç bakımda");
 	        }

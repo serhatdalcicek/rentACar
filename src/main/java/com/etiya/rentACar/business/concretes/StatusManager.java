@@ -35,7 +35,8 @@ public class StatusManager implements StatusService{
 	@Override
 	public void add(CreateStatusRequest createStatusRequest) {		
 		
-		Status status=modelMapperService.forRequest().map(createStatusRequest, Status.class);
+		Status status=modelMapperService.forRequest()
+				.map(createStatusRequest, Status.class);
 		
 		statusDao.save(status);
 		
@@ -65,7 +66,7 @@ public class StatusManager implements StatusService{
 		
 		List<ListStatusDto> response = statuses.stream()
 				.map(status -> this.modelMapperService.forDto()
-				.map(status, ListStatusDto.class)) //s takısına dikkat et
+				.map(status, ListStatusDto.class)) 
 				.collect(Collectors.toList());
 		return response;
 	}

@@ -25,8 +25,8 @@ public class Maintenance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // id üretmek için
 
-	@Column(name = "maintananceId")
-	private int maintananceId;
+	@Column(name = "maintenanceId")
+	private int maintenanceId;
 
 	@ManyToOne
 	@JoinColumn(name = "car_id")

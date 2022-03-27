@@ -1,5 +1,6 @@
 package com.etiya.rentACar.business.responses.stateResponses;
 
+
 import com.etiya.rentACar.entities.Situations;
 
 import lombok.AllArgsConstructor;

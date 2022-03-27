@@ -8,15 +8,13 @@ import com.etiya.rentACar.entities.Situations;
 
 public interface MaintenanceService {
 	
-	void add(CreateMaintenanceRequest createMaintenanceRequest,Situations situations);
+	void add(CreateMaintenanceRequest createMaintenanceRequest,Situations situations); //
 
 	List<ListMaintenanceDto> getAll();
 	
 	List<ListMaintenanceDto> getAllSituations(Situations situations);
 
 	List<ListMaintenanceDto> getByCarId(int id);
-
-
 
 
 	/*List<ListMaintenanceDto> getByStatusId(int id);*/

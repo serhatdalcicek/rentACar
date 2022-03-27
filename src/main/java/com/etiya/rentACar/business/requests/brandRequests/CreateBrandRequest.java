@@ -1,6 +1,5 @@
 package com.etiya.rentACar.business.requests.brandRequests;
 
-import com.etiya.rentACar.entities.Brand;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -13,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class CreateBrandRequest {
 	
 	@JsonIgnore
-	private int id;
+	private int brandId;
 	
-	private String name;
+	private String brandName;
     
 	
 }

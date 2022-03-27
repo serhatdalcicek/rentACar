@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.etiya.rentACar.business.requests.brandRequests.CreateBrandRequest;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,10 +23,11 @@ import lombok.NoArgsConstructor;
 public class Brand {
 	@Id // id diğer alanlardan farklı olduğunu
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // oluşturulan değer
-	@Column(name = "id") // sütun
+	
+	@Column(name = "brandId") // sütun
 	private int id;
 
-	@Column(name = "name") // ccolumn gösterme demek
+	@Column(name = "brandName") // ccolumn gösterme demek
 	private String name;
 
 	@OneToMany(mappedBy = "brand")

@@ -1,5 +1,7 @@
 package com.etiya.rentACar.business.responses.damageResponses;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,16 +13,17 @@ import lombok.NoArgsConstructor;
 public class ListDamageDto {
 	
    
-   private int id;
+	private int damageId;
+	
+    private int carId;
+    
+    private String carDescription;
+    
+    private LocalDate date;
+    
+    private String description;
    
-   private int carId;
+  
+   }
    
-   private int date;
-   
-   private String description;
-   
-   private String carDescription;
-   
-   
-   
-}
+

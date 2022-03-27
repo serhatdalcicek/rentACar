@@ -1,7 +1,6 @@
 package com.etiya.rentACar.business.concretes;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageRequest;
@@ -10,16 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.DamageService;
-import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
 import com.etiya.rentACar.business.requests.damageRequests.CreateDamageRequest;
-import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
-import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
 import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
-import com.etiya.rentACar.dataAccess.abstracts.ColorDao;
 import com.etiya.rentACar.dataAccess.abstracts.DamageDao;
-import com.etiya.rentACar.entities.Car;
-import com.etiya.rentACar.entities.Color;
 import com.etiya.rentACar.entities.Damage;
 
 @Service

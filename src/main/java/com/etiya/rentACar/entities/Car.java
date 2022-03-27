@@ -25,7 +25,7 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	@Column(name = "id")
+	@Column(name = "carId")
 	private int id;
 
 	@Column(name = "dailyPrice")
@@ -35,19 +35,21 @@ public class Car {
 	private String description;
 	
 	@Column(name = "modelYear")
-	private short modelYear;
+	private int modelYear;
 
 	@ManyToOne
-	@JoinColumn(name = "color_id")//renk id ye göre yapar
+	@JoinColumn(name = "colorId")//renk id ye göre yapar
 	private Color color;
 	
 	@ManyToOne //diğerlerine bağlama
-	@JoinColumn(name="brand_id")
+	@JoinColumn(name="brandId")
 	private Brand brand;
 	
 	
 	@OneToMany(mappedBy = "car")
 	private List<Damage> damages;
 	
+	@OneToMany(mappedBy = "car")
+    List<Maintenance> maintanances;
 	
 }

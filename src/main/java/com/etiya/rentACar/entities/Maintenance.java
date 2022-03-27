@@ -19,21 +19,30 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "damages")
-public class Damage {
+@Table(name = "maintenances")
+public class Maintenance {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //id üretmek için
 	
-	@Column(name = "damageId")
-	private int id;
+	@Column(name = "maintananceId")
+	private int maintananceId;
 	
-	@Column(name = "date")
-	private LocalDate date;
-	
-	@Column(name = "description")
-	private String description;
-
 	@ManyToOne
 	@JoinColumn(name = "car_id")
 	private Car car;
+	
+	
+	@Column(name = "dateAdded")
+	private LocalDate dateAdded;
+	
+	@Column(name = "dateReturned")
+	private LocalDate dateReturned;
+	
+	@ManyToOne
+	@JoinColumn(name ="statusId")
+	private Status status; //nesnelerin özellerinin tümüne erişmek için kendisini kullanıyoruz
+
+	
+
 }

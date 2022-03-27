@@ -22,10 +22,10 @@ import lombok.NoArgsConstructor;
 public class Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "colorId")
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "colorName")
 	private String name;
 	
 	@OneToMany(mappedBy = "color")

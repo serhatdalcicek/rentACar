@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
-import com.etiya.rentACar.business.responses.brandResponses.ListBrandDto;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
+import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.CarDao;
-import com.etiya.rentACar.entities.Brand;
 import com.etiya.rentACar.entities.Car;
-import com.etiya.rentACar.entities.Color;
 
 @Service
 public class CarManager implements CarService {
@@ -31,73 +29,76 @@ public class CarManager implements CarService {
 
 	@Override
 	public void add(CreateCarRequest createCarRequest) {
-		
+
+		if (createCarRequest.getDailyPrice() < 50) {
+			
+			throw new BusinessException("Fiyatı 50 Tl'den düşük araba kiralanamaz !");
+
+		}
+
 		Car car = this.modelMapperService.forRequest()
-				
+
 				.map(createCarRequest, Car.class);
 
-		        this.carDao.save(car);
+		this.carDao.save(car);
+
 	}
 
 	@Override
 	public List<ListCarDto> getAll() {
-		
+
 		List<Car> cars = this.carDao.findAll();
-		
+
 		List<ListCarDto> response = cars.stream()
-				
-				.map(car -> this.modelMapperService.forDto()
-				.map(car, ListCarDto.class)).collect(Collectors.toList());
-		
+
+				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+
 		return response;
 	}
 
-	
-		@Override
-	    public List<ListCarDto> getAllByModelYear(int modelYear) {
-			
-	        List<Car> cars = this.carDao.getByModelYear(modelYear);
-	        
-	        List<ListCarDto> response = cars.stream()
-	        		
-	        		.map(car -> this.modelMapperService.forDto()
-	        		.map(car,ListCarDto.class)).collect(Collectors.toList());
-	       
-	        return response;
-	        
+	@Override
+	public List<ListCarDto> getAllByModelYear(int modelYear) {
+
+		List<Car> cars = this.carDao.getByModelYear(modelYear);
+
+		List<ListCarDto> response = cars.stream()
+
+				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+
+		return response;
+
 	}
 
-		@Override
-		public List<ListCarDto> getAllPage(int pageNo, int pageSize) { //sayfalar
-			
-           Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-           
-		List<Car> cars = this.carDao.findAll(pageable).getContent();
-		
-		 List<ListCarDto> response = cars.stream()
-				 
-				 .map(car -> this.modelMapperService.forDto()
-				 .map(car,ListCarDto.class)).collect(Collectors.toList());
-	       
-		 return response;
-		}
+	@Override
+	public List<ListCarDto> getAllPage(int pageNo, int pageSize) { // sayfalar
 
-		@Override
-		public List<ListCarDto> getAllSorted() {//sıralama nasıl yapılır
-         
-			Sort sort = Sort.by(Sort.Direction.DESC, "modelYear");
-         
-			List<Car> cars = this.carDao.findAll(sort);
-  		
- 		 
-			List<ListCarDto> response = cars.stream()
- 				
-					.map(car -> this.modelMapperService.forDto()
- 				 
-					.map(car,ListCarDto.class)).collect(Collectors.toList());
- 	       
-			return response;
-		}
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+		List<Car> cars = this.carDao.findAll(pageable).getContent();
+
+		List<ListCarDto> response = cars.stream()
+
+				.map(car -> this.modelMapperService.forDto().map(car, ListCarDto.class)).collect(Collectors.toList());
+
+		return response;
+	}
+
+	@Override
+	public List<ListCarDto> getAllSorted() {// sıralama nasıl yapılır
+
+		Sort sort = Sort.by(Sort.Direction.DESC, "modelYear");
+
+		List<Car> cars = this.carDao.findAll(sort);
+
+		List<ListCarDto> response = cars.stream()
+
+				.map(car -> this.modelMapperService.forDto()
+
+						.map(car, ListCarDto.class))
+				.collect(Collectors.toList());
+
+		return response;
+	}
 //uçağın yükselmesi asc yani a'dan z ye
-		//uçağın alçalması desc yani z' den a ya
+	// uçağın alçalması desc yani z' den a ya
 }

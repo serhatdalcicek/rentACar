@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CreateCarRequest {
 
 	@JsonIgnore
-	private int id;
+	private int carId;
 
 	private double dailyPrice;
 

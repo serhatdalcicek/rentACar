@@ -5,85 +5,73 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.ColorService;
 import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
-import com.etiya.rentACar.business.responses.brandResponses.ListBrandDto;
-import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
-import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
+import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.ColorDao;
-import com.etiya.rentACar.entities.Brand;
-import com.etiya.rentACar.entities.Car;
 import com.etiya.rentACar.entities.Color;
-import com.etiya.rentACar.entities.Damage;
 
 @Service
 public class ColorManager implements ColorService {
 	private ColorDao colorDao;
 	private ModelMapperService modelMapperService;
 
-	
-
 	public ColorManager(ColorDao colorDao, ModelMapperService modelMapperService) {
 		this.colorDao = colorDao;
 		this.modelMapperService = modelMapperService;
 	}
 
-
-
 	@Override
 	public void add(CreateColorRequest createColorRequest) {
+        
 		
-		createColorRequest.setColorName(createColorRequest.getColorName().toLowerCase()); //toLowerCase = büyük harfleri küçük harfe çevirir
+		checkIfIsColorName(createColorRequest.getColorName());
 		
-        if (!colorDao.existsColorByName(createColorRequest.getColorName().toLowerCase())) { //! = değilse anlamına gelir //exitsts=belirtilen dizin adresinde dosyanın var olup olmadığının karşılığını boolean veri tipinde bizlere verir.
-        	
-            Color color = this.modelMapperService.forRequest()
-            		.map(createColorRequest, Color.class);
-            
-            this.colorDao.save(color);
-            
-        } else {
-        	
-            throw new RuntimeException("Bu renk daha önce kaydedilmiştir :/"); //hata mesajı tanımlaması 
-        }
-    }
 
+		Color color = this.modelMapperService.forRequest().map(createColorRequest, Color.class);
 
+		this.colorDao.save(color);
+
+	}
 
 	@Override
 	public List<ListColorDto> getAll() {
-		
-		  List<Color> colors = this.colorDao.findAll();
-		  
-	        List<ListColorDto> response = colors.stream()
-	        		
-	        		.map(color -> this.modelMapperService.forDto()
-	        		.map(color,ListColorDto.class)).collect(Collectors.toList());
-	       
-	        return response;
+
+		List<Color> colors = this.colorDao.findAll();
+
+		List<ListColorDto> response = colors.stream()
+
+				.map(color -> this.modelMapperService.forDto().map(color, ListColorDto.class))
+				.collect(Collectors.toList());
+
+		return response;
 	}
+
 	@Override
-	public List<ListColorDto> getAllPaged(int pageNo, int pageSize) { //sayfalar
-		
-       Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-       
-	List<Color> colors = this.colorDao.findAll(pageable).getContent();
-	
-	 List<ListColorDto> response = colors.stream()
-			 
-			 .map(color -> this.modelMapperService.forDto()
-			 .map(color,ListColorDto.class)).collect(Collectors.toList());
-       
-	 return response;
+	public List<ListColorDto> getAllPaged(int pageNo, int pageSize) { // sayfalar
+
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+		List<Color> colors = this.colorDao.findAll(pageable).getContent();
+
+		List<ListColorDto> response = colors.stream()
+
+				.map(color -> this.modelMapperService.forDto().map(color, ListColorDto.class))
+				.collect(Collectors.toList());
+
+		return response;
 	}
 
+	private void checkIfIsColorName(String colorName) {
 
+		if (this.colorDao.existsByNameIgnoreCase(colorName)) {
+			
+			throw new BusinessException("Bu renk daha önce kaydedilmiştir :/");
+		}
 
 	}
-
-
+}

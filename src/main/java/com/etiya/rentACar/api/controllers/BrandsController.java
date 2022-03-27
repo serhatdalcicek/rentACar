@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.etiya.rentACar.business.abstracts.BrandService;
 import com.etiya.rentACar.business.requests.brandRequests.CreateBrandRequest;
 import com.etiya.rentACar.business.responses.brandResponses.ListBrandDto;
-import com.etiya.rentACar.entities.Brand;
 
 //dış dünya ile iletişim kurar 
 @RestController

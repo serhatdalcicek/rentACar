@@ -6,10 +6,10 @@ import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
 import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
 
 public interface ColorService {
- void add(CreateColorRequest createColorRequest);
+	void add(CreateColorRequest createColorRequest);
 
-List<ListColorDto> getAll();
+	List<ListColorDto> getAll();
 
-List<ListColorDto> getAllPaged(int pageNo, int pageSize);
+	List<ListColorDto> getAllPaged(int pageNo, int pageSize);
 
 }

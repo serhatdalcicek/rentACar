@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class CreateColorRequest {
 	
 	  @JsonIgnore
-	  private int id;
+	  private int colorId;
 	
 	  private String colorName;
 }

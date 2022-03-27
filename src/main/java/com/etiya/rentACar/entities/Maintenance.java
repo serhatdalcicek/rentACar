@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,28 +22,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "maintenances")
 public class Maintenance {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //id üretmek için
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id üretmek için
+
 	@Column(name = "maintananceId")
 	private int maintananceId;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "car_id")
 	private Car car;
-	
-	
+
 	@Column(name = "dateAdded")
 	private LocalDate dateAdded;
-	
+
 	@Column(name = "dateReturned")
 	private LocalDate dateReturned;
-	
-	@ManyToOne
-	@JoinColumn(name ="statusId")
-	private Status status; //nesnelerin özellerinin tümüne erişmek için kendisini kullanıyoruz
 
-	
+	 @OneToOne
+	 @JoinColumn(name="statusId")
+	 private Status statusName;
 
 }

@@ -49,21 +49,15 @@ public class MaintenanceManager implements MaintenanceService {
 				.collect(Collectors.toList());
 		return response;
 	}
-	@Override
-	public List<ListMaintenanceDto> getByStatusId(int id){
-		
-	List<Maintenance> maintenances = this.maintenanceDao.getByStatusId(id);
+
 	
-	List<ListMaintenanceDto> response = maintenances.stream()
-			.map(maintenance -> this.modelMapperService.forDto()
-					.map(maintenances, ListMaintenanceDto.class))
-			.collect(Collectors.toList());
-	return response;
-		
-	}
+
 	private void checkIfCarId(int carId) {
 		if (maintenanceDao.existsMaintenanceByCarId(carId)) {
 			throw new RuntimeException("Maalesef bu araç bakımdadır");
 		}
 	}
+
+	
+
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.MaintenanceService;
@@ -48,9 +47,6 @@ public class MaintenancesController {
 		
 		return maintenanceService.getAll();
 	}
-	@GetMapping("/getbystatusid")
-	public List<ListMaintenanceDto> getBySatatusId(@RequestParam("statusId") int id){
-		return this.maintenanceService.getByStatusId(id);
-	}
+	
 
 }

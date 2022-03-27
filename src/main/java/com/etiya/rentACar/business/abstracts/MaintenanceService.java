@@ -12,6 +12,6 @@ public interface MaintenanceService {
 
 	List<ListMaintenanceDto> getByCarId(int id);
 
-	List<ListMaintenanceDto> getByStatusId(int id);
+	/*List<ListMaintenanceDto> getByStatusId(int id);*/
 
 }

@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +50,12 @@ public class Car {
 	@OneToMany(mappedBy = "car")
 	private List<Damage> damages;
 	
+	
 	@OneToMany(mappedBy = "car")
-    List<Maintenance> maintanances;
+    private List<Maintenance> maintanances;
+	
+	@ManyToOne
+	@JoinColumn(name = "statusId")
+	private Status status;
 	
 }

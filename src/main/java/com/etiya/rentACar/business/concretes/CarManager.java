@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
+import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
@@ -43,6 +44,31 @@ public class CarManager implements CarService {
 		this.carDao.save(car);
 
 	}
+	
+	 @Override
+	    public void update(UpdateCarRequest updateCarRequest) {
+
+	        Car car=this.modelMapperService.forRequest()
+	        .map(updateCarRequest,Car.class);
+	        
+	        this.carDao.save(car);
+	 }
+	 @Override
+	    public void updateStatus(UpdateCarRequest updateCarRequest) {
+
+	        Car car=this.carDao.getById(updateCarRequest.getCarId());
+
+	        UpdateCarRequest updateCarRequest2 = this.modelMapperService.forRequest()
+	        		.map(car, UpdateCarRequest.class);
+	        
+	        updateCarRequest2.setStatusId(2);
+
+	        car = this.modelMapperService.forRequest()
+	        		.map(updateCarRequest2, Car.class);
+	        
+	        this.carDao.save(car);
+
+	    }
 
 	@Override
 	public List<ListCarDto> getAll() {
@@ -107,4 +133,19 @@ public class CarManager implements CarService {
 	}
 //uçağın yükselmesi asc yani a'dan z ye
 	// uçağın alçalması desc yani z' den a ya
+
+	 @Override
+	    public ListCarDto getById(int id) {
+	        Car car1=this.carDao.getById(id);
+	        ListCarDto listCarDto = this.modelMapperService.forRequest().map(car1, ListCarDto.class);
+	        return listCarDto;
+	    }
+
+	@Override
+	public List<ListCarDto> getByCarId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

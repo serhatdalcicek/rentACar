@@ -9,21 +9,21 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+public class UpdateCarRequest {
 
-public class CreateCarRequest {
-
-	@JsonIgnore
+	
 	private int carId;
-
+	
 	private double dailyPrice;
-
+	
 	private String description;
-
+	
 	private int modelYear;
-
+	
 	private int colorId;
-
+	
 	private int brandId;
 	
+	@JsonIgnore
 	private int statusId;
 }

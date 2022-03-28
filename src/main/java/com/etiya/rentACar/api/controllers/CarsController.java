@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
+import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 
 @RestController
@@ -26,6 +27,10 @@ public class CarsController {
 	public void add(@RequestBody CreateCarRequest createCarRequest) {
 		this.carService.add(createCarRequest);
 	}
+	@PostMapping("/update")
+    public void update(@RequestBody UpdateCarRequest updateCarRequest) {
+        this.carService.update(updateCarRequest);
+    }
 	@GetMapping("/getall")
 	public List<ListCarDto>getAll(){
 		return this.carService.getAll();

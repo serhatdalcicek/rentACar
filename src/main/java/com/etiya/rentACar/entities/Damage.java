@@ -35,6 +35,6 @@ public class Damage {
 	private String description;
 
 	@ManyToOne
-	@JoinColumn(name = "car_id")
+	@JoinColumn(name = "carId")
 	private Car car;
 }

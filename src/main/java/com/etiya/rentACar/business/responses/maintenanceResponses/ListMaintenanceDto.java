@@ -2,7 +2,6 @@ package com.etiya.rentACar.business.responses.maintenanceResponses;
 
 import java.time.LocalDate;
 
-import com.etiya.rentACar.entities.Situations;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,17 +15,16 @@ public class ListMaintenanceDto {
 
 	private int maintananceId;
 
-	private String carDescription;
+	private String description;
 
 	private LocalDate dateAdded;
 
 	private LocalDate dateReturned;
 	
-    private String statusName;
+    //private String statusName;
     
-    private int statusId;
+    //private int statusId;
     
-    private Situations situations;
-
+    private int carId;
 
 }

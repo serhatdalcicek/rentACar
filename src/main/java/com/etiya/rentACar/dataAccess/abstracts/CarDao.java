@@ -19,5 +19,8 @@ public interface CarDao extends JpaRepository<Car, Integer> {
     
     List<Car> getByDescriptionContains(String description); //descriptiona göre listeleme yapar
     
+   // List<Car>getAllByStatus(CarStatus type); //bakımda olan araçlar listelenebilmelidir
+    
+    //Car getByCarId(int id);
 }
 //getByModelYear diyip parametre verdi

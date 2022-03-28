@@ -38,6 +38,17 @@ public class ColorManager implements ColorService {
 		this.colorDao.save(color);
 
 	}
+	@Override
+	public void delete(Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Color color) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public List<ListColorDto> getAll() {
@@ -77,4 +88,6 @@ public class ColorManager implements ColorService {
 		}
 
 	}
+
+	
 }

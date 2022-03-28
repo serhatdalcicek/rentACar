@@ -29,7 +29,7 @@ public class Maintenance {
 	private int maintenanceId;
 
 	@ManyToOne
-	@JoinColumn(name = "car_id")
+	@JoinColumn(name = "carId")
 	private Car car;
 
 	@Column(name = "dateAdded")
@@ -37,8 +37,11 @@ public class Maintenance {
 
 	@Column(name = "dateReturned")
 	private LocalDate dateReturned;
-
-	@Column(name = "situations")  //situations = durumlar demektir
-	private Situations situations;
+	
+	@Column(name = "description")
+	private String description;
+	
+	
+	
 
 }

@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateStatusRequest {
-    
-	@JsonIgnore
-	private int id;
 	
-	private String name;
+	@JsonIgnore //Verilen alan son kullanıcıya gösterilmez. Kullanıcı buna giriş yapamaz.
+	private int statusId;
+
+	private String statusName;
 }

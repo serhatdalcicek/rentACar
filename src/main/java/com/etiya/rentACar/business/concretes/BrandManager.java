@@ -40,6 +40,19 @@ public class BrandManager implements BrandService {
 
 		this.brandDao.save(brand);
 	}
+	
+	
+
+    @Override
+    public void delete(Brand brand) {
+        brandDao.delete(brand);
+    }
+
+    @Override
+    public void update(Brand brand) {
+
+    }
+
 
 	// throw new RuntimeException("Bu marka daha önce eklenmiştir.!");
 

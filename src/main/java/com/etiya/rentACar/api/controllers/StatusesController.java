@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.StatusService;
-import com.etiya.rentACar.business.requests.stateRequests.CreateStatusRequest;
-import com.etiya.rentACar.business.responses.stateResponses.ListStatusDto;
+import com.etiya.rentACar.business.requests.statusRequests.CreateStatusRequest;
+import com.etiya.rentACar.business.responses.statusResponses.ListStatusDto;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController // Bir Rest controller olabilmesi için bu tanım gereklidir.
 @RequestMapping("/api/statuses") // Mapping işlemi standart olarak /api ile başlar.
@@ -24,7 +26,7 @@ public class StatusesController {
 	}
 
 	@PostMapping("/add") // Bir post operasyonu api/add dediğinde veriler eklenir.
-	public void add(CreateStatusRequest createStatusRequest) {
+	public void add(@RequestBody CreateStatusRequest createStatusRequest) {
 
 		statusService.add(createStatusRequest);
 	}
@@ -35,15 +37,15 @@ public class StatusesController {
 		return statusService.getAll();
 	}
 
-	@GetMapping("/getbystatusid")
+	/*@GetMapping("/getbystatusid")
 	public List<ListStatusDto> getByStatusId(int id) {
 
 		return this.statusService.getByStatusId(id);
 
-		/*
-		 * public List<ListStatusDto> getByStatusId(@RequestParam("statusId") int id){
-		 * return this.statusService.getByStatusId(id);
-		 */
-	}
+		
+		 //public List<ListStatusDto> getByStatusId(@RequestParam("statusId") int id){
+		// return this.statusService.getByStatusId(id);
+		 
+	}*/
 
 }

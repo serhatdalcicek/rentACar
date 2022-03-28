@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.MaintenanceService;
 import com.etiya.rentACar.business.requests.maintenanceRequests.CreateMaintenanceRequest;
+import com.etiya.rentACar.business.requests.maintenanceRequests.UpdateMaintenanceRequest;
 import com.etiya.rentACar.business.responses.maintenanceResponses.ListMaintenanceDto;
-import com.etiya.rentACar.entities.Situations;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -27,10 +26,15 @@ public class MaintenancesController {
 	}
 
 	@PostMapping(name = "/add")
-	public void add(@RequestBody CreateMaintenanceRequest createMaintenanceRequest,@RequestParam Situations situations) { //
+	public void add(@RequestBody CreateMaintenanceRequest createMaintenanceRequest) { 
 		
-		maintenanceService.add(createMaintenanceRequest, situations); //
+		maintenanceService.add(createMaintenanceRequest); //
 	}
+	
+	 @PostMapping("/update")
+	    public void update(@RequestBody UpdateMaintenanceRequest updateMaintenanceRequest){
+	        this.maintenanceService.update(updateMaintenanceRequest);
+	    }
 
 	/*
 	 * @GetMapping("/getByCarId") public void getByCarId(@RequestParam int id) {
@@ -49,9 +53,6 @@ public class MaintenancesController {
 		
 		return maintenanceService.getAll();
 	}
-	@GetMapping("/getallsituations")
-	public List<ListMaintenanceDto> getAll(@RequestParam Situations situations){
-		return maintenanceService.getAllSituations(situations);
-	}
+	
 
 }

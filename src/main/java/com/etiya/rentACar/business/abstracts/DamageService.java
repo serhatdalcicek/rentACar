@@ -6,6 +6,7 @@ import com.etiya.rentACar.business.requests.damageRequests.CreateDamageRequest;
 import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
 
 public interface DamageService {
+	
 	void add(CreateDamageRequest createDamageRequest);
 
 	List<ListDamageDto> getAll();

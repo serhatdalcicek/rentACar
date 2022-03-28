@@ -2,8 +2,8 @@ package com.etiya.rentACar.business.abstracts;
 
 import java.util.List;
 
-import com.etiya.rentACar.business.requests.stateRequests.CreateStatusRequest;
-import com.etiya.rentACar.business.responses.stateResponses.ListStatusDto;
+import com.etiya.rentACar.business.requests.statusRequests.CreateStatusRequest;
+import com.etiya.rentACar.business.responses.statusResponses.ListStatusDto;
 
 public interface StatusService {
 	
@@ -11,7 +11,7 @@ public interface StatusService {
 
 	List<ListStatusDto> getAll();
 
-	List<ListStatusDto> getByStatusId(int id);
+	//List<ListStatusDto> getByStatusId(int id);
 	
 	
 

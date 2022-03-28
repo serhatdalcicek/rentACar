@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.StatusService;
-import com.etiya.rentACar.business.requests.stateRequests.CreateStatusRequest;
-import com.etiya.rentACar.business.responses.stateResponses.ListStatusDto;
+import com.etiya.rentACar.business.requests.statusRequests.CreateStatusRequest;
+import com.etiya.rentACar.business.responses.statusResponses.ListStatusDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.StatusDao;
 import com.etiya.rentACar.entities.Status;
@@ -59,7 +59,7 @@ public class StatusManager implements StatusService{
 		return response;
 	}
 	
-	@Override
+	/*@Override
 	public List<ListStatusDto> getByStatusId(int id) {
 		
 		List<Status> statuses = this.statusDao.getByStatusId(id);
@@ -69,5 +69,5 @@ public class StatusManager implements StatusService{
 				.map(status, ListStatusDto.class)) 
 				.collect(Collectors.toList());
 		return response;
-	}
+	}*/
 }

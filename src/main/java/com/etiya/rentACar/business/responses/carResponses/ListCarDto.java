@@ -1,5 +1,7 @@
 package com.etiya.rentACar.business.responses.carResponses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +22,9 @@ public class ListCarDto {
 	private String colorName;
 
 	private String brandName;
+	
+	private String statusName;
+	
+	@JsonIgnore
+	private int statusId;
 }

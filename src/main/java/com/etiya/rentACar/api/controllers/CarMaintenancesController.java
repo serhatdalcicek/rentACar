@@ -25,7 +25,7 @@ public class CarMaintenancesController {
 		this.carMaintenanceService = carMaintenanceService;
 	}
 
-	@PostMapping(name = "/add")
+	@PostMapping("/add")
 	public void add(@RequestBody CreateCarMaintenanceRequest createCarMaintenanceRequest) {
 
 		carMaintenanceService.add(createCarMaintenanceRequest); //

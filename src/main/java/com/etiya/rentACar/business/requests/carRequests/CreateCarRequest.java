@@ -25,5 +25,7 @@ public class CreateCarRequest {
 
 	private int brandId;
 	
-	private int statusId;
+   // private CarStates statesName;
+
+	
 }

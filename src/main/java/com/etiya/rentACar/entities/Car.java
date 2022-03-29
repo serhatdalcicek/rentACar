@@ -38,6 +38,9 @@ public class Car {
 	@Column(name = "modelYear")
 	private int modelYear;
 
+	@Column(name = "car_state")
+	private CarStates carState;
+	
 	@ManyToOne
 	@JoinColumn(name = "colorId")//renk id ye göre yapar
 	private Color color;
@@ -48,14 +51,11 @@ public class Car {
 	
 	
 	@OneToMany(mappedBy = "car")
-	private List<Damage> damages;
+	private List<CarDamage> cardamages;
 	
 	
 	@OneToMany(mappedBy = "car")
-    private List<Maintenance> maintanances;
+    private List<CarMaintenance> carMaintanances;
 	
-	@ManyToOne
-	@JoinColumn(name = "statusId")
-	private Status status;
 	
 }

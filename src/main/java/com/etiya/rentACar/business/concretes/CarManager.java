@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
+import com.etiya.rentACar.business.requests.carRequests.DeleteCarRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
+import com.etiya.rentACar.business.responses.carResponses.CarDto;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
@@ -48,28 +50,18 @@ public class CarManager implements CarService {
 	 @Override
 	    public void update(UpdateCarRequest updateCarRequest) {
 
-	        Car car=this.modelMapperService.forRequest()
+	        Car car = this.modelMapperService.forRequest()
 	        .map(updateCarRequest,Car.class);
 	        
 	        this.carDao.save(car);
 	 }
-	 @Override
-	    public void updateStatus(UpdateCarRequest updateCarRequest) {
 
-	        Car car=this.carDao.getById(updateCarRequest.getCarId());
-
-	        UpdateCarRequest updateCarRequest2 = this.modelMapperService.forRequest()
-	        		.map(car, UpdateCarRequest.class);
-	        
-	        updateCarRequest2.setStatusId(2);
-
-	        car = this.modelMapperService.forRequest()
-	        		.map(updateCarRequest2, Car.class);
-	        
-	        this.carDao.save(car);
-
-	    }
-
+		@Override
+		public void delete(DeleteCarRequest deleteCarRequest) {
+			
+			this.carDao.deleteById(deleteCarRequest.getCarId());			
+		}
+	
 	@Override
 	public List<ListCarDto> getAll() {
 
@@ -98,9 +90,8 @@ public class CarManager implements CarService {
 		return response;
 
 	}
-
 	@Override
-	public List<ListCarDto> getAllPage(int pageNo, int pageSize) { // sayfalar
+	public List<ListCarDto> getAllPaged(int pageNo, int pageSize) { // sayfalar
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
@@ -116,9 +107,9 @@ public class CarManager implements CarService {
 	}
 
 	@Override
-	public List<ListCarDto> getAllSorted() {// sıralama nasıl yapılır
+	public List<ListCarDto> getAllSorted(String option, String fields) {// sıralama nasıl yapılır
 
-		Sort sort = Sort.by(Sort.Direction.DESC, "modelYear");
+		Sort sort = Sort.by(Sort.Direction.valueOf(option),fields);
 
 		List<Car> cars = this.carDao.findAll(sort);
 
@@ -134,17 +125,13 @@ public class CarManager implements CarService {
 //uçağın yükselmesi asc yani a'dan z ye
 	// uçağın alçalması desc yani z' den a ya
 
-	 @Override
-	    public ListCarDto getById(int id) {
-	        Car car1=this.carDao.getById(id);
-	        ListCarDto listCarDto = this.modelMapperService.forRequest().map(car1, ListCarDto.class);
-	        return listCarDto;
-	    }
-
 	@Override
-	public List<ListCarDto> getByCarId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CarDto getById(int id) {
+      Car result = this.carDao.getById(id);
+		
+		CarDto response = this.modelMapperService.forDto().map(result, CarDto.class);
+		
+		return response;
 	}
 
 

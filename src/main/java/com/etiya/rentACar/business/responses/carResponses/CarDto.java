@@ -1,5 +1,7 @@
 package com.etiya.rentACar.business.responses.carResponses;
 
+import java.time.LocalDate;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,22 +10,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListCarDto {
+public class CarDto {
+
+	private int damageId;
 
 	private int carId;
 
-	private double dailyPrice;
+	private LocalDate date;
 
 	private String description;
 
-	private int modelYear;
-
-	private String colorName;
-
-	private String brandName;
+	private String carDescription;
 	
 	//private CarStates states;
-	
-	
-	
+
+
 }

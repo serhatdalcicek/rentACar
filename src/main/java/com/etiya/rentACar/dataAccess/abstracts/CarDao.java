@@ -17,10 +17,9 @@ public interface CarDao extends JpaRepository<Car, Integer> {
     
     List<Car> getByModelYearAndDailyPrice(int modelYear, double dailyPrice);//model yılına göre günlük parası olanları gösterir
     
-    List<Car> getByDescriptionContains(String description); //descriptiona göre listeleme yapar
+    List<Car> getByDescriptionContainsIgnoreCase(String description); //descriptiona göre listeleme yapar
     
-   // List<Car>getAllByStatus(CarStatus type); //bakımda olan araçlar listelenebilmelidir
-    
-    //Car getByCarId(int id);
+    Car getById(int id);
+
 }
 //getByModelYear diyip parametre verdi

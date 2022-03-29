@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
+import com.etiya.rentACar.business.requests.carRequests.DeleteCarRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 
@@ -31,6 +32,10 @@ public class CarsController {
     public void update(@RequestBody UpdateCarRequest updateCarRequest) {
         this.carService.update(updateCarRequest);
     }
+	@PostMapping("/delete")
+    public void delete(@RequestBody DeleteCarRequest deleteCarRequest) {
+        this.carService.delete(deleteCarRequest);
+	}
 	@GetMapping("/getall")
 	public List<ListCarDto>getAll(){
 		return this.carService.getAll();
@@ -39,16 +44,17 @@ public class CarsController {
 	public List<ListCarDto>getAllByModelYear(@RequestParam("modelYear") short modelYear){
 		return this.carService.getAllByModelYear(modelYear);
 	}
-	@GetMapping("/getallpage")
-	List<ListCarDto> getAllPage(int pageNo,int pageSize) {
-		return this.carService.getAllPage(pageNo, pageSize);
+	@GetMapping("/getallpaged")		//hangi sayfa ve bir sayfada kaç tane olsun .. sayfada kaç tane olsuna göre yapılandırır.
+	public List<ListCarDto> getAllPaged(int pageNo,int pageSize) {
+		
+		return this.carService.getAllPaged(pageNo, pageSize);
 	}
-		//hangi sayfa ve bir sayfada kaç tane olsun .. sayfada kaç tane olsuna göre yapılandırır.
 	
-	@GetMapping("/getallsorted")
-	List<ListCarDto> getAllSorted() {
-		return this.carService.getAllSorted();
-	} //sorted sıralı demektir.
+	@GetMapping("/getallsorted")//sorted sıralı demek
+	 public  List<ListCarDto> getAllSorted(String option,String fields){
+		
+		return this.carService.getAllSorted(option,fields);
+	}
 	
 		
 	}

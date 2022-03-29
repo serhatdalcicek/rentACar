@@ -8,12 +8,13 @@ import com.etiya.rentACar.entities.Brand;
 
 public interface BrandService {
 	
-	void add(CreateBrandRequest createBrandRequest);
 	
-	void delete(Brand brand);
-	
-	void update(Brand brand);
 
 	List<ListBrandDto> getAll();
+	
+	
+	void add(CreateBrandRequest createBrandRequest);
+	void delete(Brand brand);
+	void update(Brand brand);
 
 }

@@ -7,14 +7,15 @@ import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
 import com.etiya.rentACar.entities.Color;
 
 public interface ColorService {
-	void add(CreateColorRequest createColorRequest);
 	
-	void delete(Color color);
 	
-    void update(Color color);
-    
+	
 	List<ListColorDto> getAll();
-
 	List<ListColorDto> getAllPaged(int pageNo, int pageSize);
 
+	
+	void add(CreateColorRequest createColorRequest);
+	void delete(Color color);
+    void update(Color color);
+    
 }

@@ -8,21 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateCarRequest {
-
+public class DeleteCarRequest {
 	
 	private int carId;
-	
-	private double dailyPrice;
-	
-	private String description;
-	
-	private int modelYear;
-	
-	private int colorId;
-	
-	private int brandId;
-	
-    //private CarStates statesName;
-
 }

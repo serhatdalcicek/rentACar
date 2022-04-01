@@ -3,6 +3,11 @@ package com.etiya.rentACar.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.etiya.rentACar.business.constants.BusinessMessages;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
+import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.CarMaintenanceService;
@@ -11,7 +16,7 @@ import com.etiya.rentACar.business.requests.carMaintenanceRequests.CreateCarMain
 import com.etiya.rentACar.business.requests.carMaintenanceRequests.DeleteCarMaintenanceRequest;
 import com.etiya.rentACar.business.requests.carMaintenanceRequests.UpdateCarMaintenanceRequest;
 import com.etiya.rentACar.business.responses.carMaintenanceResponses.ListCarMaintenanceDto;
-import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
+import com.etiya.rentACar.core.utilities.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.CarMaintenanceDao;
 import com.etiya.rentACar.entities.CarMaintenance;
 
@@ -22,6 +27,7 @@ public class CarMaintenanceManager implements CarMaintenanceService {
 	private ModelMapperService modelMapperService;
 	private CarService carService;
 
+
 	public CarMaintenanceManager(CarMaintenanceDao carMaintenanceDao, ModelMapperService modelMapperService, CarService carService) {
 		
 		this.carMaintenanceDao = carMaintenanceDao;
@@ -31,38 +37,45 @@ public class CarMaintenanceManager implements CarMaintenanceService {
 
 	
 	@Override
-	public void add(CreateCarMaintenanceRequest createMaintenanceRequest) {
+	public Result add(CreateCarMaintenanceRequest createCarMaintenanceRequest) {
 
-		checkIfCarId(createMaintenanceRequest.getCarId());
+		checkIfCarId(createCarMaintenanceRequest.getCarId());
 		
 		CarMaintenance carMaintenance = modelMapperService.forRequest()
-				.map(createMaintenanceRequest, CarMaintenance.class);
+				.map(createCarMaintenanceRequest, CarMaintenance.class);
 		
-		carMaintenanceDao.save(carMaintenance);
+		this.carMaintenanceDao.save(carMaintenance);
+
+		return new SuccessResult(BusinessMessages.CarMaintenanceMessage.CAR_MAINTENANCE_ADD);
 		
 		
 		
 	}
 
 	@Override
-	public void update(UpdateCarMaintenanceRequest updateCarMaintenanceRequest) {
+	public Result update(UpdateCarMaintenanceRequest updateCarMaintenanceRequest) {
 		
 		CarMaintenance carMaintenance = this.modelMapperService.forRequest()
 				.map(updateCarMaintenanceRequest, CarMaintenance.class);
 	        
-		this.carMaintenanceDao.save(carMaintenance);		
+		this.carMaintenanceDao.save(carMaintenance);
+
+		return new SuccessResult(BusinessMessages.CarMaintenanceMessage.CAR_MAINTENANCE_UPDATE);
+
 	}
 
 
 
 	@Override
-	public void delete(DeleteCarMaintenanceRequest deleteCarMaintenanceRequest) {
+	public Result delete(DeleteCarMaintenanceRequest deleteCarMaintenanceRequest) {
 		
-		this.carMaintenanceDao.deleteById(deleteCarMaintenanceRequest.getMaintenanceId());			
-		
+		this.carMaintenanceDao.deleteById(deleteCarMaintenanceRequest.getMaintenanceId());
+
+		return new SuccessResult(BusinessMessages.CarMaintenanceMessage.CAR_MAINTENANCE_DELETE);
+
 	}
 	@Override
-	public List<ListCarMaintenanceDto> getAll() {
+	public DataResult<List<ListCarMaintenanceDto>> getAll() {
 		
 		List<CarMaintenance> carMaintenances = this.carMaintenanceDao.findAll();
 		
@@ -70,12 +83,12 @@ public class CarMaintenanceManager implements CarMaintenanceService {
                 .map(carMaintenance -> modelMapperService.forDto()
                 		.map(carMaintenance, ListCarMaintenanceDto.class))
                 .collect(Collectors.toList());
-       
-        return response;
+
+		return new SuccessDataResult<List<ListCarMaintenanceDto>>(response);
 	}
 
 	@Override
-	public List<ListCarMaintenanceDto> getByCarId(int carId) {
+	public DataResult<List<ListCarMaintenanceDto>> getByCarId(int carId) {
 		
 		List<CarMaintenance> carMaintenances = this.carMaintenanceDao.getByCarId(carId);
 		
@@ -84,7 +97,7 @@ public class CarMaintenanceManager implements CarMaintenanceService {
                         .map(carMaintenance, ListCarMaintenanceDto.class))
                 .collect(Collectors.toList());
         
-        return response;
+        return new SuccessDataResult<List<ListCarMaintenanceDto>>(response);
 	}
 
 

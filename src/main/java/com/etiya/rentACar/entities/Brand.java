@@ -21,9 +21,9 @@ import lombok.NoArgsConstructor;
 @Entity // veri tabanı
 @Table(name = "brands") // tabla ismi
 public class Brand {
+
 	@Id // id diğer alanlardan farklı olduğunu
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // oluşturulan değer
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "brandId") // sütun
 	private int id;
 
@@ -32,5 +32,6 @@ public class Brand {
 
 	@OneToMany(mappedBy = "brand")
 	private List<Car> cars;
+
 
 }

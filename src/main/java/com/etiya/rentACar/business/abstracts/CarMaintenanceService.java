@@ -6,19 +6,21 @@ import com.etiya.rentACar.business.requests.carMaintenanceRequests.CreateCarMain
 import com.etiya.rentACar.business.requests.carMaintenanceRequests.DeleteCarMaintenanceRequest;
 import com.etiya.rentACar.business.requests.carMaintenanceRequests.UpdateCarMaintenanceRequest;
 import com.etiya.rentACar.business.responses.carMaintenanceResponses.ListCarMaintenanceDto;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
 
 public interface CarMaintenanceService {
 	
 	
-	List<ListCarMaintenanceDto> getAll();
-	List<ListCarMaintenanceDto> getByCarId(int id);
+	DataResult<List<ListCarMaintenanceDto>> getAll();
+	DataResult<List<ListCarMaintenanceDto>> getByCarId(int carId);
 	
 
 
 	
-	void add(CreateCarMaintenanceRequest createCarMaintenanceRequest); //
-	void update(UpdateCarMaintenanceRequest updateCarMaintenanceRequest);
-	void delete(DeleteCarMaintenanceRequest deleteCarMaintenanceRequest);
+	Result add(CreateCarMaintenanceRequest createCarMaintenanceRequest); //
+	Result update(UpdateCarMaintenanceRequest updateCarMaintenanceRequest);
+	Result delete(DeleteCarMaintenanceRequest deleteCarMaintenanceRequest);
 
 
 

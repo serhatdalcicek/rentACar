@@ -3,6 +3,11 @@ package com.etiya.rentACar.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.etiya.rentACar.business.constants.BusinessMessages;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
+import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,8 +20,8 @@ import com.etiya.rentACar.business.requests.carDamageRequests.DeleteCarDamageReq
 import com.etiya.rentACar.business.requests.carDamageRequests.UpdateCarDamageRequest;
 import com.etiya.rentACar.business.responses.carDamageResponses.CarDamageDto;
 import com.etiya.rentACar.business.responses.carDamageResponses.ListCarDamageDto;
-import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
-import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
+import com.etiya.rentACar.core.crossCuttingConserns.exceptionHandling.BusinessException;
+import com.etiya.rentACar.core.utilities.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.CarDamageDao;
 import com.etiya.rentACar.entities.CarDamage;
 
@@ -32,19 +37,43 @@ public class CarDamageManager implements CarDamageService {
 		this.carDamageDao = carDamageDao;
 		this.carService = carService;
 	}
-
 	@Override
-	public CarDamageDto getById(int id) {
+	public Result add(CreateCarDamageRequest createCarDamageRequest) {
 
-		CarDamage result = this.carDamageDao.getById(id);
-		
-		CarDamageDto response = this.modelMapperService.forDto().map(result, CarDamageDto.class);
-		
-		return response;
+		CarDamage carDamage =	this.modelMapperService.forRequest()
+				.map(createCarDamageRequest, CarDamage.class);
+
+		this.carDamageDao.save(carDamage);
+		return new SuccessResult(BusinessMessages.CarDamageMessage.CARDAMAGE_ADD);
+
 	}
 
 	@Override
-	public List<ListCarDamageDto> getAll() {
+	public Result update(UpdateCarDamageRequest updateCarDamageRequest) {
+
+		checkIfCarExists(updateCarDamageRequest.getCarId());
+
+		CarDamage carDamage =	this.modelMapperService.forRequest() //1.yöntem
+				.map(updateCarDamageRequest, CarDamage.class);
+
+		this.carDamageDao.save(carDamage);
+		return new SuccessResult(BusinessMessages.CarDamageMessage.CARDAMAGE_UPDATE);
+
+	}
+
+	@Override
+	public Result delete(DeleteCarDamageRequest deleteCarDamageRequest) {
+
+
+		this.carDamageDao.deleteById(deleteCarDamageRequest.getDamageId());
+
+		return new SuccessResult(BusinessMessages.CarDamageMessage.CARDAMAGE_DELETE);
+
+
+	}
+
+	@Override
+	public DataResult<List<ListCarDamageDto>> getAll() {
        
 	 List<CarDamage> result =	this.carDamageDao.findAll();
 	 
@@ -52,77 +81,29 @@ public class CarDamageManager implements CarDamageService {
 			 .map(carDamage -> this.modelMapperService.forDto()
 			 .map(carDamage, ListCarDamageDto.class))
 			 .collect(Collectors.toList());
-		
-	 return response;
+
+		return new SuccessDataResult<List<ListCarDamageDto>>(response);
 	}
+	@Override
+	public DataResult<List<ListCarDamageDto>> getAllPaged(int pageNo, int pageSize) {
+
+		Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+
+		List<CarDamage> carDamages = carDamageDao.findAll(pageable).getContent();
+
+		List<ListCarDamageDto> response = carDamages.stream()
+
+				.map(carDamage -> modelMapperService.forDto()
+						.map(carDamage, ListCarDamageDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<ListCarDamageDto>>(response);
+	}
+
 
 	@Override
-	public List<ListCarDamageDto> getAllByCarId(int carId) {
-		 List<CarDamage> result =	this.carDamageDao.getAllByCarId(carId);
-		 
-		 List<ListCarDamageDto> response = result.stream()
-				 .map(carDamage -> this.modelMapperService.forDto()
-				 .map(carDamage, ListCarDamageDto.class))
-				 .collect(Collectors.toList());
-			
-		 return response;
-	}
+	public DataResult<List<ListCarDamageDto>> getAllSorted(String option, String fields) {
 
-	@Override
-	public void add(CreateCarDamageRequest createCarDamageRequest) {
-
-	CarDamage carDamage =	this.modelMapperService.forRequest()
-			.map(createCarDamageRequest, CarDamage.class);
-		
-		this.carDamageDao.save(carDamage);
-	}
-
-	@Override
-	public void update(UpdateCarDamageRequest updateCarDamageRequest) {
-		
-		checkIfCarExists(updateCarDamageRequest.getCarId());
-		
-		CarDamage carDamage =	this.modelMapperService.forRequest() //1.yöntem
-				.map(updateCarDamageRequest, CarDamage.class);
-		
-		this.carDamageDao.save(carDamage);
-	}
-
-	@Override
-	public void delete(DeleteCarDamageRequest deleteCarDamageRequest) {
-
-		
-		this.carDamageDao.deleteById(deleteCarDamageRequest.getDamageId());
-		
-	}
-	private void checkIfCarExists(int carId) {
-		
-		if(this.carService.getById(carId) == null) {
-			
-			throw new BusinessException("Böyle bir araba mevcut değildir");
-		}
-	}
-
-	 @Override
-	    public List<ListCarDamageDto> getAllPaged(int pageNo, int pageSize) {
-		 
-           Pageable pageable = PageRequest.of(pageNo -1, pageSize);
-		   
-	        List<CarDamage> carDamages = carDamageDao.findAll(pageable).getContent();
-	        
-	        List<ListCarDamageDto> response = carDamages.stream()
-	        		
-	                .map(carDamage -> modelMapperService.forDto()
-	                .map(carDamage, ListCarDamageDto.class))
-	                .collect(Collectors.toList());
-	        
-	        return response;
-	    }
-	
-
-	@Override
-	public List<ListCarDamageDto> getAllSorted(String option, String fields) {
-		
 		Sort sort = Sort.by(Sort.Direction.valueOf(option),fields);
 
 		List<CarDamage> carDamages = this.carDamageDao.findAll(sort);
@@ -134,7 +115,39 @@ public class CarDamageManager implements CarDamageService {
 						.map(carDamage, ListCarDamageDto.class))
 				.collect(Collectors.toList());
 
+		return new SuccessDataResult<List<ListCarDamageDto>>(response);
+	}
+
+	@Override
+	public DataResult<List<ListCarDamageDto>> getAllByCarId(int carId) {
+		List<CarDamage> result =	this.carDamageDao.getAllByCarId(carId);
+
+		List<ListCarDamageDto> response = result.stream()
+				.map(carDamage -> this.modelMapperService.forDto()
+						.map(carDamage, ListCarDamageDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<ListCarDamageDto>>(response);
+	}
+
+	@Override
+	public CarDamageDto getById(int id) {
+
+		CarDamage result = this.carDamageDao.getById(id);
+
+		CarDamageDto response = this.modelMapperService.forDto().map(result, CarDamageDto.class);
+
 		return response;
 	}
+
+	private void checkIfCarExists(int carId) {
+		
+		if(this.carService.getById(carId) == null) {
+			
+			throw new BusinessException("Böyle bir araba mevcut değildir");
+		}
+	}
+
+
 }
 	

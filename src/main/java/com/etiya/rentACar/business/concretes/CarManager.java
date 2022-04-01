@@ -3,19 +3,22 @@ package com.etiya.rentACar.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.etiya.rentACar.business.constants.BusinessMessages;
+import com.etiya.rentACar.business.requests.carRequests.*;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
+import com.etiya.rentACar.core.utilities.results.SuccessResult;
+import com.etiya.rentACar.entities.CarStates;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.etiya.rentACar.business.abstracts.CarService;
-import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
-import com.etiya.rentACar.business.requests.carRequests.DeleteCarRequest;
-import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
 import com.etiya.rentACar.business.responses.carResponses.CarDto;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
-import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
-import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
+import com.etiya.rentACar.core.utilities.ModelMapperService;
 import com.etiya.rentACar.dataAccess.abstracts.CarDao;
 import com.etiya.rentACar.entities.Car;
 
@@ -31,13 +34,7 @@ public class CarManager implements CarService {
 	}
 
 	@Override
-	public void add(CreateCarRequest createCarRequest) {
-
-		if (createCarRequest.getDailyPrice() < 50) {
-			
-			throw new BusinessException("Fiyatı 50 Tl'den düşük araba kiralanamaz !");
-
-		}
+	public Result add(CreateCarRequest createCarRequest) {
 
 		Car car = this.modelMapperService.forRequest()
 
@@ -45,25 +42,35 @@ public class CarManager implements CarService {
 
 		this.carDao.save(car);
 
+		return new SuccessResult(BusinessMessages.CarMessage.CAR_ADD);
 	}
+//if (createCarRequest.getDailyPrice() < 50)
+		//	throw new BusinessException("Fiyatı 50 Tl'den düşük araba kiralanamaz !");
+		//}
 	
 	 @Override
-	    public void update(UpdateCarRequest updateCarRequest) {
+	    public Result update(UpdateCarRequest updateCarRequest) {
 
 	        Car car = this.modelMapperService.forRequest()
 	        .map(updateCarRequest,Car.class);
 	        
 	        this.carDao.save(car);
+		 return new SuccessResult(BusinessMessages.CarMessage.CAR_UPDATE);
+
+
 	 }
 
 		@Override
-		public void delete(DeleteCarRequest deleteCarRequest) {
+		public Result delete(DeleteCarRequest deleteCarRequest) {
 			
-			this.carDao.deleteById(deleteCarRequest.getCarId());			
+			this.carDao.deleteById(deleteCarRequest.getCarId());
+
+			return new SuccessResult(BusinessMessages.CarMessage.CAR_DELETE);
+
 		}
 	
 	@Override
-	public List<ListCarDto> getAll() {
+	public DataResult<List<ListCarDto>> getAll() {
 
 		List<Car> cars = this.carDao.findAll();
 
@@ -73,11 +80,11 @@ public class CarManager implements CarService {
 				.map(car, ListCarDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListCarDto>>(response);
 	}
 
 	@Override
-	public List<ListCarDto> getAllByModelYear(int modelYear) {
+	public DataResult<List<ListCarDto>> getAllByModelYear(int modelYear) {
 
 		List<Car> cars = this.carDao.getByModelYear(modelYear);
 
@@ -87,11 +94,11 @@ public class CarManager implements CarService {
 				.map(car, ListCarDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListCarDto>>(response);
 
 	}
 	@Override
-	public List<ListCarDto> getAllPaged(int pageNo, int pageSize) { // sayfalar
+	public DataResult<List<ListCarDto>> getAllPaged(int pageNo, int pageSize) { // sayfalar
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
@@ -103,14 +110,14 @@ public class CarManager implements CarService {
 				.map(car, ListCarDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListCarDto>>(response);
 	}
 
 	@Override
-	public List<ListCarDto> getAllSorted(String option, String fields) {// sıralama nasıl yapılır
+	public DataResult<List<ListCarDto>> getAllSorted(String option, String fields) {// sıralama nasıl yapılır
 
 		Sort sort = Sort.by(Sort.Direction.valueOf(option),fields);
-
+ 
 		List<Car> cars = this.carDao.findAll(sort);
 
 		List<ListCarDto> response = cars.stream()
@@ -120,7 +127,30 @@ public class CarManager implements CarService {
 						.map(car, ListCarDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListCarDto>>(response);
+	}
+
+
+	@Override
+	public Result updateCarStates(UpdateCarStatesRequest updateCarStatesRequest) {
+
+		Car result = this.carDao.getById(updateCarStatesRequest.getCarId());
+		result.setCarState(updateCarStatesRequest.getCarStateName());
+		this.carDao.save(result);
+		return new SuccessResult(BusinessMessages.CarMessage.CAR_UPDATE);
+	}
+
+
+	@Override
+	public DataResult<List<ListCarDto>> getByCityId(int cityId) {
+
+		List<Car> cars = carDao.getByCityId(cityId);
+
+		List<ListCarDto> response = cars.stream()
+				.map(car -> modelMapperService.forDto().map(car, ListCarDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<ListCarDto>>(response);
 	}
 //uçağın yükselmesi asc yani a'dan z ye
 	// uçağın alçalması desc yani z' den a ya
@@ -129,7 +159,8 @@ public class CarManager implements CarService {
 	public CarDto getById(int id) {
       Car result = this.carDao.getById(id);
 		
-		CarDto response = this.modelMapperService.forDto().map(result, CarDto.class);
+		CarDto response = this.modelMapperService.forDto()
+				.map(result, CarDto.class);
 		
 		return response;
 	}

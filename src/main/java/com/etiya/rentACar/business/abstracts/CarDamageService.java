@@ -7,20 +7,22 @@ import com.etiya.rentACar.business.requests.carDamageRequests.DeleteCarDamageReq
 import com.etiya.rentACar.business.requests.carDamageRequests.UpdateCarDamageRequest;
 import com.etiya.rentACar.business.responses.carDamageResponses.CarDamageDto;
 import com.etiya.rentACar.business.responses.carDamageResponses.ListCarDamageDto;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
 
 public interface CarDamageService {
 	
 	CarDamageDto getById(int id);
 	
-	List<ListCarDamageDto> getAll();
-	List<ListCarDamageDto> getAllByCarId(int carId);
-	List<ListCarDamageDto> getAllPaged(int pageNo , int pageSize);
-	List<ListCarDamageDto> getAllSorted(String option, String fields);
+	DataResult<List<ListCarDamageDto>> getAll();
+	DataResult<List<ListCarDamageDto>> getAllByCarId(int carId);
+	DataResult<List<ListCarDamageDto>> getAllPaged(int pageNo , int pageSize);
+	DataResult<List<ListCarDamageDto>> getAllSorted(String option, String fields);
 
 	
-	void add(CreateCarDamageRequest createCarDamageRequest);
-	void update(UpdateCarDamageRequest updateCarDamageRequest);
-	void delete(DeleteCarDamageRequest deleteCarDamageRequest);
+	Result add(CreateCarDamageRequest createCarDamageRequest);
+	Result update(UpdateCarDamageRequest updateCarDamageRequest);
+	Result delete(DeleteCarDamageRequest deleteCarDamageRequest);
 
 	
 }

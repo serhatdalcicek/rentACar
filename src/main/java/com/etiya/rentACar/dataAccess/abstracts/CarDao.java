@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.etiya.rentACar.entities.Car;
 
 @Repository
-
 public interface CarDao extends JpaRepository<Car, Integer> {
     
 	List<Car> getByModelYear(int modelYear);
@@ -18,7 +17,9 @@ public interface CarDao extends JpaRepository<Car, Integer> {
     List<Car> getByModelYearAndDailyPrice(int modelYear, double dailyPrice);//model yılına göre günlük parası olanları gösterir
     
     List<Car> getByDescriptionContainsIgnoreCase(String description); //descriptiona göre listeleme yapar
-    
+
+    List<Car> getByCityId(int cityId);
+
     Car getById(int id);
 
 }

@@ -3,6 +3,8 @@ package com.etiya.rentACar.business.responses.carResponses;
 import java.time.LocalDate;
 
 
+import com.etiya.rentACar.entities.CarStates;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,17 +14,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarDto {
 
-	private int damageId;
+	private int id;
 
-	private int carId;
-
-	private LocalDate date;
+	private double dailyPrice;
 
 	private String description;
 
-	private String carDescription;
-	
-	//private CarStates states;
+	private double modelYear;
+
+	@JsonIgnore
+	private  int brandId;
+
+	@JsonIgnore
+	private  int colorId;
+
+	private int cityId;
+
+	private String brandName;
+
+	private String colorName;
+
+	private CarStates carStateName;
 
 
 }

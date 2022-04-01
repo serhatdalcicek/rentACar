@@ -1,5 +1,12 @@
 package com.etiya.rentACar.business.requests.carRequests;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.etiya.rentACar.entities.CarStates;
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -9,23 +16,34 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class CreateCarRequest {
 
-	@JsonIgnore
-	private int carId;
+    @JsonIgnore
+    private int id;
 
-	private double dailyPrice;
+    @NotNull
+    @Min(1)
+    @Max(2000)
+    private double dailyPrice;
 
-	private String description;
+    @NotNull
+    @Length(min = 2, max = 50)
+    private String description;
 
-	private int modelYear;
+    @NotNull
+    @Min(2015)
+    private double modelYear;
 
-	private int colorId;
+    private int cityId;
 
-	private int brandId;
-	
-   // private CarStates statesName;
+    @NotNull
+    private int colorId;
 
-	
+    @NotNull
+    private int brandId;
+
+    @NotNull
+    private CarStates carStateName;
+
+
 }

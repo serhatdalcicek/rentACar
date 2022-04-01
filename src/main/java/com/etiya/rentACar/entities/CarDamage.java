@@ -24,7 +24,6 @@ public class CarDamage {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name = "damageId")
 	private int id;
 	
@@ -35,6 +34,6 @@ public class CarDamage {
 	private String description;
 
 	@ManyToOne
-	@JoinColumn(name = "carId")
+	@JoinColumn(name = "car_id")
 	private Car car;
 }

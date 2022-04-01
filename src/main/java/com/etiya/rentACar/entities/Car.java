@@ -1,21 +1,13 @@
 package com.etiya.rentACar.entities;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,9 +15,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "cars")
 public class Car {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name = "carId")
 	private int id;
 
@@ -42,11 +34,11 @@ public class Car {
 	private CarStates carState;
 	
 	@ManyToOne
-	@JoinColumn(name = "colorId")//renk id ye göre yapar
+	@JoinColumn(name = "color_id")//renk id ye göre yapar
 	private Color color;
 	
 	@ManyToOne //diğerlerine bağlama
-	@JoinColumn(name="brandId")
+	@JoinColumn(name="brand_id")
 	private Brand brand;
 	
 	
@@ -57,5 +49,14 @@ public class Car {
 	@OneToMany(mappedBy = "car")
     private List<CarMaintenance> carMaintanances;
 	
-	
+
+	@ManyToOne
+	@JoinColumn(name = "car_rental_id")
+	private CarRental carRental;
+
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
+
+
 }

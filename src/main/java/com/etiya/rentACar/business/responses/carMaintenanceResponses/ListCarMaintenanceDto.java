@@ -23,6 +23,5 @@ public class ListCarMaintenanceDto {
 
 	private LocalDate dateReturned;
 	    
-    //private int carId;
 
 }

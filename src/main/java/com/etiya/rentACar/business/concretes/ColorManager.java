@@ -1,19 +1,25 @@
 package com.etiya.rentACar.business.concretes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.etiya.rentACar.business.abstracts.ColorService;
+import com.etiya.rentACar.business.constants.BusinessMessages;
+import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
+import com.etiya.rentACar.business.requests.colorRequests.DeleteColorRequest;
+import com.etiya.rentACar.business.requests.colorRequests.UpdateColorRequest;
+import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
+import com.etiya.rentACar.core.crossCuttingConserns.exceptionHandling.BusinessException;
+import com.etiya.rentACar.core.utilities.ModelMapperService;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
+import com.etiya.rentACar.core.utilities.results.SuccessResult;
+import com.etiya.rentACar.dataAccess.abstracts.ColorDao;
+import com.etiya.rentACar.entities.Color;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.etiya.rentACar.business.abstracts.ColorService;
-import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
-import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
-import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
-import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
-import com.etiya.rentACar.dataAccess.abstracts.ColorDao;
-import com.etiya.rentACar.entities.Color;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ColorManager implements ColorService {
@@ -26,7 +32,7 @@ public class ColorManager implements ColorService {
 	}
 
 	@Override
-	public void add(CreateColorRequest createColorRequest) {
+	public Result add(CreateColorRequest createColorRequest) {
         
 		
 		checkIfIsColorName(createColorRequest.getColorName());
@@ -37,21 +43,36 @@ public class ColorManager implements ColorService {
 
 		this.colorDao.save(color);
 
+		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_ADD);
+
+
 	}
-	@Override
-	public void delete(Color color) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
-	public void update(Color color) {
-		// TODO Auto-generated method stub
-		
+	public Result update(UpdateColorRequest updateColorRequest) {
+
+        Color color = this.modelMapperService.forRequest()
+        .map(updateColorRequest,Color.class);
+        
+        this.colorDao.save(color);
+
+		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_UPDATE);
+
+	}
+	@Override
+	public Result delete(DeleteColorRequest deleteColorRequest) {
+
+		this.colorDao.deleteById(deleteColorRequest.getColorId());
+
+		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_DELETE);
+
+
 	}
 
+
 	@Override
-	public List<ListColorDto> getAll() {
+	public DataResult<List<ListColorDto>> getAll() {
 
 		List<Color> colors = this.colorDao.findAll();
 
@@ -61,11 +82,11 @@ public class ColorManager implements ColorService {
 				.map(color, ListColorDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListColorDto>>(response);
 	}
 
 	@Override
-	public List<ListColorDto> getAllPaged(int pageNo, int pageSize) { // sayfalar
+	public DataResult<List<ListColorDto>> getAllPaged(int pageNo, int pageSize) { // sayfalar
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
@@ -77,7 +98,7 @@ public class ColorManager implements ColorService {
 				.map(color, ListColorDto.class))
 				.collect(Collectors.toList());
 
-		return response;
+		return new SuccessDataResult<List<ListColorDto>>(response);
 	}
 
 	private void checkIfIsColorName(String colorName) {

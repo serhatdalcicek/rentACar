@@ -78,9 +78,16 @@ public class BusinessMessages {
 
 	}
 
-	public class CarCreateMessage{
+	public class AdditionalServiceMessage{
 
+		public static final String ADDITIONAL_SERVICES_ADD = "Ek hizmet başarılı bir şekilde eklendi.";
+		public static final String ADDITIONAL_SERVICES_UPDATE = "Ek hizmet başarılı bir şekilde güncellendi.";
+		public static final String ADDITIONAL_SERVICES_DELETE = "Ek hizmet başarılı bir şekilde silindi.";
+	}
+	public class OrderedAdditionalMessage {
 
-		public static final String CAR_CREATED = "Araba Kaydı Başarılı.";
+		public static final String ORDERED_ADDITIONAL_ADD = "Sipariş başarılı bir şekilde eklendi.";
+		public static final String ORDERED_ADDITIONAL_UPDATE = "Sipariş başarılı bir şekilde güncellendi.";
+		public static final String ORDERED_ADDITIONAL_DELETE = "Sipariş başarılı bir şekilde silindi.";
 	}
 }

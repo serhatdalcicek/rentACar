@@ -73,7 +73,7 @@ public class CarRentalManager implements CarRentalService {
             this.orderedAdditionalServiceService.add(deneme);
         }
 
-        //
+
         return new SuccessResult(BusinessMessages.CarRentalMessage.CAR_RENTAL_ADD);
     }
 

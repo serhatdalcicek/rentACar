@@ -18,16 +18,15 @@ public class ListCarDto {
 
 	private String description;
 
-	private double modelYear;
+	private int modelYear;
 
-	private int cityName;
+	private String cityName;
 
 	private String brandName;
 
 	private String colorName;
 
 	private CarStates carStateName;
-
 
 
 

@@ -13,7 +13,7 @@ public interface BrandDao extends JpaRepository<Brand, Integer>{
 //integer class
 //brand operasyonları içerir
 	
-   List<ListBrandDto> getByNameIgnoreCase(String name);
+   //List<ListBrandDto> getByNameIgnoreCase(String name);
 
 	boolean existsBrandByNameIgnoreCase(String name);
 }

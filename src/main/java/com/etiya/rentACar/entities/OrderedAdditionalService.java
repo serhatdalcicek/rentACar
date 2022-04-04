@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "ordered_additional_services")
-public class OrderedAdditionalService { //sipariş edilen ek hizmetler
+public class OrderedAdditionalService { //sipariş olan ek hizmet
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +19,11 @@ public class OrderedAdditionalService { //sipariş edilen ek hizmetler
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "car_rental_id")
-    private CarRental carRental;
+    @JoinColumn(name = "rental_id")
+    private Rental rental;
 
     @ManyToOne
     @JoinColumn(name = "additional_service_id")
     private AdditionalService additionalService;
-
-
 }
+

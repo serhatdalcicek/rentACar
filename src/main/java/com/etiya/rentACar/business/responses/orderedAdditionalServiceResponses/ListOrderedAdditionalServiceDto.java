@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class ListOrderedAdditionalServiceDto {
 
     private int id;
+
     private int rentalId;
-    private int additionalServiceId;
+
+    private String  additionalServiceName;
+
+    private int additionalServiceDailyPrice;
 }

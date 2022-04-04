@@ -7,7 +7,6 @@ import com.etiya.rentACar.entities.Color;
 
 @Repository
 public interface ColorDao extends JpaRepository<Color, Integer>{
-      
    
 	boolean existsByNameIgnoreCase(String name);
 }

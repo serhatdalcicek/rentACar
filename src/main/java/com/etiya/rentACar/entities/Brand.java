@@ -14,24 +14,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//data anatasyon denir
-@Data // get ve set
-@AllArgsConstructor //
-@NoArgsConstructor // parametresiz const
-@Entity // veri tabanı
-@Table(name = "brands") // tabla ismi
-public class Brand {
 
-	@Id // id diğer alanlardan farklı olduğunu
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "brands")
+public class Brand {
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "brandId") // sütun
+	@Column(name = "id")
 	private int id;
 
-	@Column(name = "brandName") // ccolumn gösterme demek
+	@Column(name = "name")
 	private String name;
 
 	@OneToMany(mappedBy = "brand")
 	private List<Car> cars;
-
 
 }

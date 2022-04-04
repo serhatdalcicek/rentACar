@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor //parametresiz const
 public class DeleteBrandRequest {
 	
-	private int brandId;
+	private int id;
 
 }

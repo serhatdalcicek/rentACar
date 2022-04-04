@@ -18,9 +18,12 @@ public interface CarDao extends JpaRepository<Car, Integer> {
     
     List<Car> getByDescriptionContainsIgnoreCase(String description); //descriptiona göre listeleme yapar
 
-    List<Car> getByCityId(int cityId);
 
-    Car getById(int id);
+
+    //List<Car> getByCityId(int cityId);
+
+   // Car getById(int id);
+
 
 }
 //getByModelYear diyip parametre verdi

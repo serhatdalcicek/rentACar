@@ -18,10 +18,12 @@ import javax.validation.constraints.NotNull;
 public class CreateColorRequest {
 	
 	  @JsonIgnore
-	  private int colorId;
+	  private int id;
 
 	  @NotNull
 	  @Length(min = 2,max = 50 )
-	  private String colorName;
+	  private String name;
+
+
 }
 

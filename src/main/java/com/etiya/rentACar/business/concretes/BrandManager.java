@@ -33,14 +33,14 @@ public class BrandManager implements BrandService {
 	@Override
 	public Result add(CreateBrandRequest createBrandRequest) {
 
-		checkIfIsBrandName(createBrandRequest.getBrandName());
+		checkIfIsBrandName(createBrandRequest.getName());
 		
 		Brand brand = this.modelMapperService.forRequest()
 				.map(createBrandRequest, Brand.class);
 
 		this.brandDao.save(brand);
 
-		return new SuccessResult(BusinessMessages.BrandMessage.BRAND_ADD);
+		return new SuccessResult(BusinessMessages.BrandMessages.BRAND_ADDED);
 	}
 	@Override
     public Result update(UpdateBrandRequest updateBrandRequest) {
@@ -49,15 +49,17 @@ public class BrandManager implements BrandService {
         .map(updateBrandRequest,Brand.class);
         
         this.brandDao.save(brand);
-		return new SuccessResult(BusinessMessages.BrandMessage.BRAND_UPDATE);
+		return new SuccessResult(BusinessMessages.BrandMessages.BRAND_UPDATED);
 
     }
 	
 
     @Override
     public Result delete(DeleteBrandRequest deleteBrandRequest) {
-		this.brandDao.deleteById(deleteBrandRequest.getBrandId());	
-		return new SuccessResult(BusinessMessages.BrandMessage.BRAND_DELETE);
+
+		this.brandDao.deleteById(deleteBrandRequest.getId());
+
+		return new SuccessResult(BusinessMessages.BrandMessages.BRAND_DELETED);
 
     }
 

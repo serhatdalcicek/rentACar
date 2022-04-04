@@ -1,6 +1,7 @@
 package com.etiya.rentACar.business.requests.colorRequests;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor // parametresiz const
 public class UpdateColorRequest {
 
-	private int colorId;
+	@JsonIgnore
+	private int id;
 
 	@NotNull
 	@Length(min = 2,max = 50 )
-	private String colorName;
+	private String name;
 }

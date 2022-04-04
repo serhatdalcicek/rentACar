@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor //parametresiz const
 public class UpdateBrandRequest {
 	
-	private int brandId;
+	private int id;
 
 	@NotNull
 	@Length(min = 2, max = 20)
-	private String brandName;
+	private String name;
 }

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdditionalServiceDao extends JpaRepository<AdditionalService,Integer> {
-    AdditionalService getById(int id);
+   // AdditionalService getById(int id);
 }

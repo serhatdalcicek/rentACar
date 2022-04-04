@@ -11,15 +11,18 @@ import java.util.List;
 
 public interface CustomerService {
 
+    //Boolean checkIfExistCustomerId(int customerId);
+
 
     DataResult<List<ListCustomerDto>> getAll();
     DataResult<List<ListCustomerDto>> getAllPaged(int pageNo, int pageSize); // hangi sayfa ve bir sayfada kaç tane olsun .. sayfada kaç tane olsuna göre yapılandırır.
   //  DataResult<List<ListCustomerDto>> getAllSorted(String option, String fields); // sorted sıralı demektir.
 
-
-
-
     Result add(CreateCustomerRequest createCustomerRequest);
     Result update(UpdateCustomerRequest updateCustomerRequest);
     Result delete(DeleteCustomerRequest deleteCustomerRequest);
+
+
+
+
 }

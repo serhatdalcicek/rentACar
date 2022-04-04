@@ -10,10 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "additionalServices")
 @Entity
-public class AdditionalService {//ek hizmetler
-
+@Table(name = "additional_services")
+public class AdditionalService { //ek hizmetlerimiz
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -22,9 +21,10 @@ public class AdditionalService {//ek hizmetler
     @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name = "daily_price")
+    private int dailyPrice;
 
     @OneToMany(mappedBy = "additionalService")
     private List<OrderedAdditionalService> orderedAdditionalServices;
+
 }

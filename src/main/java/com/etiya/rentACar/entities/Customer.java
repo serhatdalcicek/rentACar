@@ -15,21 +15,23 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // id üretmek için
-    @Column(name = "customerId")
-    private  int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "national_identity")
     private String nationalIdentity;
 
     @OneToMany(mappedBy = "customer")
-    private List<CarRental> carRentals;
+    private List<Rental> rentals;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Bill> bills;
 
 
 }

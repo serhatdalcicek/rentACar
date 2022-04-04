@@ -9,54 +9,53 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "cars")
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "carId")
-	private int id;
+    @Column(name = "dailyPrice")
+    private double dailyPrice;
 
-	@Column(name = "dailyPrice")
-	private double dailyPrice;
-	
-	@Column(name = "description")
-	private String description;
-	
-	@Column(name = "modelYear")
-	private int modelYear;
+    @Column(name = "description")
+    private String description;
 
-	@Column(name = "car_state")
-	private CarStates carState;
-	
-	@ManyToOne
-	@JoinColumn(name = "color_id")//renk id ye göre yapar
-	private Color color;
-	
-	@ManyToOne //diğerlerine bağlama
-	@JoinColumn(name="brand_id")
-	private Brand brand;
-	
-	
-	@OneToMany(mappedBy = "car")
-	private List<CarDamage> cardamages;
-	
-	
-	@OneToMany(mappedBy = "car")
-    private List<CarMaintenance> carMaintanances;
-	
+    @Column(name = "modelYear")
+    private int modelYear;
 
-	@ManyToOne
-	@JoinColumn(name = "car_rental_id")
-	private CarRental carRental;
+    @Column(name = "car_state")
+    private CarStates carState;
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
+    @Column(name = "kilometer")
+    private double kilometer;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @OneToMany(mappedBy = "car")
+    private List<Damage> damages;
+
+    @OneToMany(mappedBy = "car")
+    private List<Maintenance> maintenances;
+
+    @OneToMany(mappedBy = "car")
+    private List<Rental> rentals;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
 
 }

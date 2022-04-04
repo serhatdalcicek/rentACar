@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 public class CreateBrandRequest {
 	
 	@JsonIgnore
-	private int brandId;
+	private int id;
 	
 	@NotNull
 	@Length(min = 2, max = 20)
-	private String brandName;
+	private String name;
     
 	
 }

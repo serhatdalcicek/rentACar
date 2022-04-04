@@ -27,12 +27,12 @@ public class CreateCarRequest {
     private double dailyPrice;
 
     @NotNull
-    @Length(min = 2, max = 50)
+    @Length(min = 2,max = 50)
     private String description;
 
     @NotNull
     @Min(2015)
-    private double modelYear;
+    private int modelYear;
 
     private int cityId;
 
@@ -40,10 +40,14 @@ public class CreateCarRequest {
     private int colorId;
 
     @NotNull
-    private int brandId;
+    private  int brandId;
 
     @NotNull
     private CarStates carStateName;
+
+    private double kilometer;
+
+
 
 
 }

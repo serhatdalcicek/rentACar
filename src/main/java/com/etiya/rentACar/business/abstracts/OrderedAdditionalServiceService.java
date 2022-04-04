@@ -11,10 +11,14 @@ import java.util.List;
 
 public interface OrderedAdditionalServiceService {
 
+
+
+
     DataResult<List<ListOrderedAdditionalServiceDto>> getAll();
 
+
     Result add(CreateOrderedAdditionalServiceRequest createOrderedAdditionalServiceRequest);
-    Result delete(DeleteOrderedAdditionalServiceRequest deleteOrderedAdditionalServiceRequest);
     Result update(UpdateOrderedAdditionalServiceRequest updateOrderedAdditionalServiceRequest);
+    Result delete(DeleteOrderedAdditionalServiceRequest deleteOrderedAdditionalServiceRequest);
 
 }

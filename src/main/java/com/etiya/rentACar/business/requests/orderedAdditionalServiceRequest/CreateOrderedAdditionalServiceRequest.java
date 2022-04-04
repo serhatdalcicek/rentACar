@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class CreateOrderedAdditionalServiceRequest {
     @JsonIgnore
     private int id;
-    private int carRentalId;
+
+    private int rentalId;
+
     private int additionalServiceId;
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table (name = "cities")
+@Table(name = "cities")
 public class City {
 
     @Id
@@ -20,14 +20,14 @@ public class City {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "cityName")
-    private String cityName;
+    @Column(name = "name")
+    private String name;
 
     @OneToMany(mappedBy = "rentCityId")
-    private List<CarRental> rentCityRentals;
+    private List<Rental> rentCityRentals;
 
     @OneToMany(mappedBy = "returnCityId")
-    private List<CarRental> returnCityRentals;
+    private List<Rental> returnCityRentals;
 
     @OneToMany(mappedBy = "city")
     private List<Car> cars;

@@ -35,7 +35,7 @@ public class ColorManager implements ColorService {
 	public Result add(CreateColorRequest createColorRequest) {
         
 		
-		checkIfIsColorName(createColorRequest.getColorName());
+		checkIfIsColorName(createColorRequest.getName());
 		
 
 		Color color = this.modelMapperService.forRequest()
@@ -43,7 +43,7 @@ public class ColorManager implements ColorService {
 
 		this.colorDao.save(color);
 
-		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_ADD);
+		return new SuccessResult(BusinessMessages.ColorMessages.COLOR_ADD);
 
 
 	}
@@ -57,7 +57,7 @@ public class ColorManager implements ColorService {
         
         this.colorDao.save(color);
 
-		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_UPDATE);
+		return new SuccessResult(BusinessMessages.ColorMessages.COLOR_UPDATED);
 
 	}
 	@Override
@@ -65,7 +65,7 @@ public class ColorManager implements ColorService {
 
 		this.colorDao.deleteById(deleteColorRequest.getColorId());
 
-		return new SuccessResult(BusinessMessages.ColorMessage.COLOR_DELETE);
+		return new SuccessResult(BusinessMessages.ColorMessages.COLOR_DELETED);
 
 
 	}

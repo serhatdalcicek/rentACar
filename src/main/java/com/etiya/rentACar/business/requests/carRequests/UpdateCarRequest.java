@@ -16,13 +16,14 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCarRequest {
+
     private int id;
 
     private double dailyPrice;
 
     private String description;
 
-    private double modelYear;
+    private int modelYear;
 
     private int cityId;
 
@@ -31,6 +32,10 @@ public class UpdateCarRequest {
     private int brandId;
 
     private CarStates carStateName;
+
+    private double kilometer;
+
+
 
 
 }

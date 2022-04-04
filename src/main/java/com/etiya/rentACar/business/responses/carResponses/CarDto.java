@@ -1,10 +1,6 @@
 package com.etiya.rentACar.business.responses.carResponses;
 
-import java.time.LocalDate;
-
-
 import com.etiya.rentACar.entities.CarStates;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,15 +16,9 @@ public class CarDto {
 
 	private String description;
 
-	private double modelYear;
+	private int modelYear;
 
-	@JsonIgnore
-	private  int brandId;
-
-	@JsonIgnore
-	private  int colorId;
-
-	private int cityId;
+	private String  cityName;
 
 	private String brandName;
 

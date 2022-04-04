@@ -11,7 +11,12 @@ import lombok.NoArgsConstructor;
 public class UpdateCarStatesRequest {
 
     private int carId;
+
     private int cityId;
+
+    private double kilometer;
+
     private CarStates carStateName;
+
 
 }

@@ -31,14 +31,16 @@ public class OrderedAdditionalServiceManager implements OrderedAdditionalService
 
     @Override
     public Result add(CreateOrderedAdditionalServiceRequest createOrderedAdditionalServiceRequest) {
-        OrderedAdditionalService result = this.modelMapperService.forRequest().map(createOrderedAdditionalServiceRequest, OrderedAdditionalService.class);
+        OrderedAdditionalService result = this.modelMapperService.forRequest()
+                .map(createOrderedAdditionalServiceRequest, OrderedAdditionalService.class);
         this.orderedAdditionalServiceDao.save(result);
         return new SuccessResult(BusinessMessages.OrderedAdditionalServiceMessages.OREDERED_ADDITIONAL_SERVICE_ADD);
     }
 
     @Override
     public Result update(UpdateOrderedAdditionalServiceRequest updateOrderedAdditionalServiceRequest) {
-        OrderedAdditionalService result = this.modelMapperService.forRequest().map(orderedAdditionalServiceDao, OrderedAdditionalService.class);
+        OrderedAdditionalService result = this.modelMapperService.forRequest()
+                .map(updateOrderedAdditionalServiceRequest, OrderedAdditionalService.class);
         this.orderedAdditionalServiceDao.save(result);
         return new SuccessResult(BusinessMessages.OrderedAdditionalServiceMessages.OREDERED_ADDITIONAL_SERVICE_UPDATED);
     }

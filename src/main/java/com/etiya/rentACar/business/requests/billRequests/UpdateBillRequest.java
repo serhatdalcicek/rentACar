@@ -1,6 +1,5 @@
 package com.etiya.rentACar.business.requests.billRequests;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

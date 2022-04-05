@@ -40,14 +40,16 @@ public class DamageManager implements DamageService {
 	@Override
 	public Result add(CreateDamageRequest createDamageRequest) {
 
-		Damage damage = this.modelMapperService.forRequest().map(createDamageRequest, Damage.class);
+		Damage damage = this.modelMapperService.forRequest()
+				.map(createDamageRequest, Damage.class);
 		this.damageDao.save(damage);
 		return new SuccessResult(BusinessMessages.DamageMessages.DAMAGE_ADD);
 	}
 
 	@Override
 	public Result update(UpdateDamageRequest updateDamageRequest) {
-		Damage result = this.modelMapperService.forRequest().map(updateDamageRequest, Damage.class);
+		Damage result = this.modelMapperService.forRequest()
+				.map(updateDamageRequest, Damage.class);
 		this.damageDao.save(result);
 		return new SuccessResult(BusinessMessages.DamageMessages.DAMAGE_UPDATED);
 	}
@@ -70,7 +72,9 @@ public class DamageManager implements DamageService {
 	public DataResult<List<ListDamageDto>> getAll() {
 		List<Damage> damages = this.damageDao.findAll();
 
-		List<ListDamageDto> response = damages.stream().map(damage -> this.modelMapperService.forDto().map(damage, ListDamageDto.class))
+		List<ListDamageDto> response = damages.stream()
+				.map(damage -> this.modelMapperService.forDto()
+						.map(damage, ListDamageDto.class))
 				.collect(Collectors.toList());
 		return new SuccessDataResult<List<ListDamageDto>>(response);
 	}
@@ -78,7 +82,9 @@ public class DamageManager implements DamageService {
 	@Override
 	public DataResult<List<ListDamageDto>> getAllByCarId(int carId) {
 		List<Damage> damages = this.damageDao.getAllByCarId(carId);
-		List<ListDamageDto> response = damages.stream().map(damage -> this.modelMapperService.forDto()
+
+		List<ListDamageDto> response = damages.stream()
+				.map(damage -> this.modelMapperService.forDto()
 						.map(damage, ListDamageDto.class))
 				.collect(Collectors.toList());
 		return new SuccessDataResult<List<ListDamageDto>>(response);
@@ -87,10 +93,12 @@ public class DamageManager implements DamageService {
 
 	@Override
 	public DataResult<List<ListDamageDto>> getAllPaged(int pageNo, int pageSize) {
+
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-		List<Damage> cars = this.damageDao.findAll(pageable).getContent();//content datayı anlatır burada sayfa ile biligilerde olduğu için bunu kullanıyoruz.
-		List<ListDamageDto> response = cars.stream().map(car -> this.modelMapperService.forDto()
-						.map(car, ListDamageDto.class))
+
+		List<Damage> damages = this.damageDao.findAll(pageable).getContent();//content datayı anlatır burada sayfa ile biligilerde olduğu için bunu kullanıyoruz.
+		List<ListDamageDto> response = damages.stream().map(damage -> this.modelMapperService.forDto()
+						.map(damage, ListDamageDto.class))
 				.collect(Collectors.toList());
 
 		return new SuccessDataResult<List<ListDamageDto>>(response);
@@ -100,8 +108,10 @@ public class DamageManager implements DamageService {
 	public DataResult<List<ListDamageDto>> getAllSorted(String option, String properties) {
 
 		Sort sort = Sort.by(Sort.Direction.valueOf(option), properties);
+
 		List<Damage> damages = this.damageDao.findAll(sort);
-		List<ListDamageDto> response = damages.stream().map(damage -> this.modelMapperService.forDto()
+		List<ListDamageDto> response = damages.stream()
+				.map(damage -> this.modelMapperService.forDto()
 						.map(damage, ListDamageDto.class))
 				.collect(Collectors.toList());
 

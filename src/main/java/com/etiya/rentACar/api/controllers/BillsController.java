@@ -41,7 +41,8 @@ public class BillsController {
     }
 
     @GetMapping("/findCreateDate")
-    public DataResult<List<ListBillDto>> findCreateDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ){
+    public DataResult<List<ListBillDto>> findCreateDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ){
         return this.billService.findByCreateDateBetween(startDate,endDate);
     }
     @GetMapping("/getAllCustomerId")

@@ -15,9 +15,9 @@ public class BillDto {
 
     private String billNumber;
 
-    private LocalDate rentalRentDate;
-
     private LocalDate createDate;
+
+    private LocalDate rentalRentDate;
 
     private LocalDate rentalReturnDate;
 

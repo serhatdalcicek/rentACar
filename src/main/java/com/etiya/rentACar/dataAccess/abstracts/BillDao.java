@@ -16,7 +16,7 @@ public interface BillDao extends JpaRepository<Bill,Integer> {
 
     List<Bill> findByCreateDateBetween(LocalDate startDate, LocalDate endDate);
 
-    //başlangıç ve bitiş tarihine göre
+    //başlangıç ve bitiş tarihinin ara
 
 
 }

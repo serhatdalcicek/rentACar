@@ -52,6 +52,7 @@ public class BillManager implements BillService {
         bill.setReturnDate(rentalDto.getReturnDate());
         bill.setTotalPrice(calculateTotalPrice(rentalDto));
         bill.setTotalRentDay(daysCount);
+
         this.billDao.save(bill);
 
 
@@ -104,6 +105,7 @@ public class BillManager implements BillService {
     public DataResult<List<ListBillDto>> findByCreateDateBetween(LocalDate startDate, LocalDate endDate) {
 
         List<Bill> bills = this.billDao.findByCreateDateBetween(startDate, endDate);
+
         List<ListBillDto> response = bills.stream()
                 .map(bill -> modelMapperService.forDto()
                 .map(bill, ListBillDto.class)).collect(Collectors.toList());

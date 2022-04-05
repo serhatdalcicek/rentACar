@@ -22,6 +22,7 @@ public class BusinessMessages {
 		public static final String CITY_ADD = "şehir eklendi.";
 		public static final String  CITY_DELETED = "şehir silme işlemi başarıyla gerçekleşti";
 		public static final String CITY_UPDATED = "Şehir güncelleme işlemi başarıyla gerçekleşti";
+		public static final String CITY_NAME_EXIST = "Girdiğiniz şehir mevcuttur";
 	}
 
 	public class BrandMessages {

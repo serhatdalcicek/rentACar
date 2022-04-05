@@ -6,6 +6,7 @@ import com.etiya.rentACar.business.requests.cityRequests.CreateCityRequest;
 import com.etiya.rentACar.business.requests.cityRequests.DeleteCityRequest;
 import com.etiya.rentACar.business.requests.cityRequests.UpdateCityRequest;
 import com.etiya.rentACar.business.responses.cityResponses.ListCityDto;
+import com.etiya.rentACar.core.crossCuttingConserns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
@@ -32,10 +33,13 @@ public class CityManager implements CityService {
 
     @Override
     public Result add(CreateCityRequest createCityRequest) {
+        checkIfIsCityName(createCityRequest.getName());
+
         City city = modelMapperService.forRequest().map(createCityRequest, City.class);
         cityDao.save(city);
         return new SuccessResult(BusinessMessages.CityMessages.CITY_ADD);
     }
+
 
     @Override
     public Result delete(DeleteCityRequest deleteCityRequest) {
@@ -59,4 +63,10 @@ public class CityManager implements CityService {
         return new SuccessDataResult<List<ListCityDto>>(response);
     }
 
+    public void checkIfIsCityName(String cityName) {
+        if (cityDao.existsBrandByNameIgnoreCase(cityName)) {
+
+            throw new RuntimeException(BusinessMessages.CityMessages.CITY_NAME_EXIST);//girdiginiz şehir mevcut mesajı verır.
+        }
+    }
 }

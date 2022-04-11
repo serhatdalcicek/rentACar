@@ -7,7 +7,6 @@ import com.etiya.rentACar.business.constants.BusinessMessages;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarCityRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarStatesRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateKilometerRequest;
-import com.etiya.rentACar.business.requests.orderedAdditionalServiceRequest.CreateOrderedAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.rentalRequests.CreateRentalRequest;
 import com.etiya.rentACar.business.requests.rentalRequests.DeleteRentalRequest;
 import com.etiya.rentACar.business.requests.rentalRequests.ReturnRentalRequest;
@@ -16,7 +15,7 @@ import com.etiya.rentACar.business.responses.carResponses.CarDto;
 import com.etiya.rentACar.business.responses.rentalResponses.ListRentalDto;
 import com.etiya.rentACar.business.responses.rentalResponses.RentalDto;
 import com.etiya.rentACar.core.crossCuttingConserns.exceptionHandling.BusinessException;
-import com.etiya.rentACar.core.utilities.ModelMapperService;
+import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
@@ -44,24 +43,26 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public Result add(CreateRentalRequest createRentalRequest) {
+    public DataResult <Rental>add(CreateRentalRequest createRentalRequest) {
+
         int carId = createRentalRequest.getCarId();
         checkIfCarState(carId);
 
 
-        Rental result = this.modelMapperService.forRequest().map(createRentalRequest, Rental.class);
+        Rental result = this.modelMapperService.forRequest()
+                .map(createRentalRequest, Rental.class);
+
+        CarDto car = this.carService.getById(carId);
+        result.setBeforeRentKilometer(car.getKilometer());
         this.rentalDao.save(result);
 
+
+
+        updateCarCity(carId,createRentalRequest.getReturnCityId());
         CarStates status = CarStates.Rented;
         updateCarState(carId, status);
 
-        int rentalId = result.getId();
-
-        List<Integer> additionalServicesId = createRentalRequest.getAdditionalServiceId();
-
-        createOrderedAdditionalService(rentalId, additionalServicesId);
-
-        return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_ADD);
+        return new SuccessDataResult<Rental>(result,BusinessMessages.RentalMessages.RENTAL_ADD);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class RentalManager implements RentalService {
 
         result.setReturnDate(returnRentalRequest.getReturnDate());
 
-        result.setEndKilometer(returnRentalRequest.getEndKilometer());
+        result.setBeforeRentKilometer(returnRentalRequest.getAfterRentKilometer());
 
         this.rentalDao.save(result);
 
@@ -125,7 +126,7 @@ public class RentalManager implements RentalService {
 
     private void updateCarKilometer(ReturnRentalRequest returnRentalRequest) {
 
-        double startCarKilometer = returnRentalRequest.getEndKilometer();
+        double startCarKilometer = returnRentalRequest.getAfterRentKilometer();
 
         int carId = returnRentalRequest.getCarId();
 
@@ -193,7 +194,7 @@ public class RentalManager implements RentalService {
         this.carService.updateCarCity(updateCarCityRequest);
     }
 
-    private void createOrderedAdditionalService(int rentalId, List<Integer> additionalServicesId) {
+    /*private void createOrderedAdditionalService(int rentalId, List<Integer> additionalServicesId) {
 
         CreateOrderedAdditionalServiceRequest createOrderedAdditionalServiceRequest = new CreateOrderedAdditionalServiceRequest();
 
@@ -204,9 +205,9 @@ public class RentalManager implements RentalService {
             createOrderedAdditionalServiceRequest.setAdditionalServiceId(additionalServiceId);
 
             this.orderedAdditionalServiceService.add(createOrderedAdditionalServiceRequest);
-        }
+        }*/
     }
 
 
-}
+
 

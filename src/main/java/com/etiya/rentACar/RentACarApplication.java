@@ -3,6 +3,7 @@ package com.etiya.rentACar;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.etiya.rentACar.core.outServices.HalkBankPosService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,7 +32,12 @@ public class RentACarApplication {
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
-	
+	@Bean
+	public HalkBankPosService getHalkBankPosService(){
+		return new HalkBankPosService();
+	}
+
+
 	@ExceptionHandler
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public ErrorDataResult<Object> handleValidationExceptions(MethodArgumentNotValidException methodArgumentNotValidException){

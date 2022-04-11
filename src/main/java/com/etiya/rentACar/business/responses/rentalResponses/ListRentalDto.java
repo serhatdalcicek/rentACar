@@ -33,6 +33,10 @@ public class ListRentalDto {
 
     private double dailyPrice;
 
+    private double afterRentKilometer;
+
+    private double beforeRentKilometer;
+
     private List<OrderedAdditionalServiceDto> orderedAdditionalService;
 
 }

@@ -1,4 +1,4 @@
-package com.etiya.rentACar.business.requests.billRequests;
+package com.etiya.rentACar.business.requests.invoiceRequests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,11 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateBillRequest {
+public class UpdateInvoiceRequest {
 
     private int id;
 
-    private String billNumber;
+    private String invoiceNumber;
 
     private LocalDate createDate;
 

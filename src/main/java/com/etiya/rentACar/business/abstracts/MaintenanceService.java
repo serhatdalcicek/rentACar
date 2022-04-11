@@ -11,10 +11,6 @@ import com.etiya.rentACar.core.utilities.results.Result;
 
 public interface MaintenanceService {
 
-
-
-
-
 	DataResult<List<ListMaintenanceDto>> getAll();
 	DataResult<List<ListMaintenanceDto>> getAllMaintenanceByCarId(int CarId);
 

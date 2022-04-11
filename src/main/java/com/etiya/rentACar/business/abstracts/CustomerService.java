@@ -6,21 +6,20 @@ import com.etiya.rentACar.business.requests.customerRequests.UpdateCustomerReque
 import com.etiya.rentACar.business.responses.customerResponses.ListCustomerDto;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.entities.Customer;
 
 import java.util.List;
 
 public interface CustomerService {
+    Result add(CreateCustomerRequest createCustomerRequest);
 
-    //Boolean checkIfExistCustomerId(int customerId);
+    Result update(UpdateCustomerRequest updateCustomerRequest);
 
+    Result delete(DeleteCustomerRequest deleteCustomerRequest);
+
+    DataResult<Customer> getById(int customerId);
 
     DataResult<List<ListCustomerDto>> getAll();
-    DataResult<List<ListCustomerDto>> getAllPaged(int pageNo, int pageSize); // hangi sayfa ve bir sayfada kaç tane olsun .. sayfada kaç tane olsuna göre yapılandırır.
-  //  DataResult<List<ListCustomerDto>> getAllSorted(String option, String fields); // sorted sıralı demektir.
-
-    Result add(CreateCustomerRequest createCustomerRequest);
-    Result update(UpdateCustomerRequest updateCustomerRequest);
-    Result delete(DeleteCustomerRequest deleteCustomerRequest);
 
 
 

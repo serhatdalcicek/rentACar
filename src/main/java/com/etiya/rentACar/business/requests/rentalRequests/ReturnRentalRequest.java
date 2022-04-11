@@ -17,8 +17,9 @@ public class ReturnRentalRequest {
 
     private int returnCityId;
 
-    private double endKilometer;
+    private double afterRentKilometer;
 
     public LocalDate returnDate;
+
 
 }

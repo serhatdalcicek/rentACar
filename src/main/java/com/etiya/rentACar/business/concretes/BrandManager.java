@@ -11,7 +11,7 @@ import com.etiya.rentACar.business.requests.brandRequests.CreateBrandRequest;
 import com.etiya.rentACar.business.requests.brandRequests.DeleteBrandRequest;
 import com.etiya.rentACar.business.requests.brandRequests.UpdateBrandRequest;
 import com.etiya.rentACar.business.responses.brandResponses.ListBrandDto;
-import com.etiya.rentACar.core.utilities.ModelMapperService;
+import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 import com.etiya.rentACar.core.utilities.results.SuccessDataResult;

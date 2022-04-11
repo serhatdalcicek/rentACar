@@ -1,4 +1,4 @@
-package com.etiya.rentACar.core.utilities;
+package com.etiya.rentACar.core.utilities.mapping;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

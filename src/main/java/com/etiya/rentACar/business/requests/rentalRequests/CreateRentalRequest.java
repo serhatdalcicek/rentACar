@@ -37,7 +37,6 @@ public class CreateRentalRequest {
     @NotNull
     private int returnCityId;
 
-    private List<Integer> additionalServiceId;
 
 
 }

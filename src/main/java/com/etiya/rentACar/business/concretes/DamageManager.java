@@ -8,7 +8,7 @@ import com.etiya.rentACar.business.requests.damageRequests.DeleteDamageRequest;
 import com.etiya.rentACar.business.requests.damageRequests.UpdateDamageRequest;
 import com.etiya.rentACar.business.responses.damageResponses.DamageDto;
 import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
-import com.etiya.rentACar.core.utilities.ModelMapperService;
+import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 import com.etiya.rentACar.core.utilities.results.SuccessDataResult;

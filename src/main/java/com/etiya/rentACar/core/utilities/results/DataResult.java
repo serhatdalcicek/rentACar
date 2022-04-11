@@ -14,7 +14,8 @@ public class DataResult<T> extends Result {
 		this.data = data; // kullanıcının verdiği data yı dönder demek
 	}
 
-	public T getData() {
+
+    public T getData() {
 		return data;
 
 	}

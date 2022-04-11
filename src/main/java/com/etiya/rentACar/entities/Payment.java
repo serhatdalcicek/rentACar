@@ -5,44 +5,38 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bills")
-public class Bill { //faturalarımız
+@Table(name = "payments")
+public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "bill_number")
-    private String billNumber;
-
-    @Column(name = "create_date")
-    private LocalDate createDate;
-
-    @Column(name = "rent_date")
-    private LocalDate rentDate;
-
-    @Column(name = "return_date")
-    private LocalDate returnDate;
-
-    @Column(name = "total_rent_day")
-    private int totalRentDay;
+    @Column(name = "payment_number")
+    private String paymentNumber;
 
     @Column(name = "total_price")
     private double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "invoice_id",referencedColumnName = "id")
+    private Invoice invoice;
+
+    @OneToOne
     @JoinColumn(name = "rental_id")
     private Rental rental;
+
 
 
 }

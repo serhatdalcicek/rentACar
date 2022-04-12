@@ -63,7 +63,7 @@ public class CityManager implements CityService {
     }
 
     public void checkIfIsCityName(String cityName) {
-        if (cityDao.existsBrandByNameIgnoreCase(cityName)) {
+        if (cityDao.existsCityByNameIgnoreCase(cityName)) {
 
             throw new RuntimeException(BusinessMessages.CityMessages.CITY_NAME_EXIST);//girdiginiz şehir mevcut mesajı verır.
         }

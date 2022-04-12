@@ -1,13 +1,12 @@
 package com.etiya.rentACar.business.abstracts;
 
-import java.util.List;
-
 import com.etiya.rentACar.business.requests.carRequests.*;
 import com.etiya.rentACar.business.responses.carResponses.CarDto;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
-import com.etiya.rentACar.entities.CarStates;
+
+import java.util.List;
 
 public interface CarService {
 

@@ -39,9 +39,5 @@ public class CustomersController {
     public DataResult<List<ListCustomerDto>> getAll() {
         return this.customerService.getAll();
     }
-    @GetMapping("/getallpaged")
-    DataResult<List<ListCustomerDto>> getAllPaged(int pageNo, int pageSize) {
-        return this.customerService.getAllPaged(pageNo, pageSize);
-    }
 
 }

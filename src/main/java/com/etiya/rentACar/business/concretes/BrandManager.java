@@ -1,12 +1,7 @@
 package com.etiya.rentACar.business.concretes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.etiya.rentACar.business.constants.BusinessMessages;
-import org.springframework.stereotype.Service;
-
 import com.etiya.rentACar.business.abstracts.BrandService;
+import com.etiya.rentACar.business.constants.BusinessMessages;
 import com.etiya.rentACar.business.requests.brandRequests.CreateBrandRequest;
 import com.etiya.rentACar.business.requests.brandRequests.DeleteBrandRequest;
 import com.etiya.rentACar.business.requests.brandRequests.UpdateBrandRequest;
@@ -18,6 +13,10 @@ import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
 import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import com.etiya.rentACar.dataAccess.abstracts.BrandDao;
 import com.etiya.rentACar.entities.Brand;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BrandManager implements BrandService {

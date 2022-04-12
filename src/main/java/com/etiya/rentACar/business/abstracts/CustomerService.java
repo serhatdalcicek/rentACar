@@ -11,17 +11,12 @@ import com.etiya.rentACar.entities.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    Result add(CreateCustomerRequest createCustomerRequest);
-
-    Result update(UpdateCustomerRequest updateCustomerRequest);
-
-    Result delete(DeleteCustomerRequest deleteCustomerRequest);
 
     DataResult<Customer> getById(int customerId);
-
     DataResult<List<ListCustomerDto>> getAll();
 
-
-
+    Result add(CreateCustomerRequest createCustomerRequest);
+    Result update(UpdateCustomerRequest updateCustomerRequest);
+    Result delete(DeleteCustomerRequest deleteCustomerRequest);
 
 }

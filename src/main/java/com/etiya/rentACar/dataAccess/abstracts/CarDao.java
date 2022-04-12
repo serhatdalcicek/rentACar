@@ -1,11 +1,10 @@
 package com.etiya.rentACar.dataAccess.abstracts;
 
-import java.util.List;
-
+import com.etiya.rentACar.entities.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.etiya.rentACar.entities.Car;
+import java.util.List;
 
 @Repository
 public interface CarDao extends JpaRepository<Car, Integer> {
@@ -20,10 +19,7 @@ public interface CarDao extends JpaRepository<Car, Integer> {
 
 
 
-    //List<Car> getByCityId(int cityId);
 
-   // Car getById(int id);
 
 
 }
-//getByModelYear diyip parametre verdi

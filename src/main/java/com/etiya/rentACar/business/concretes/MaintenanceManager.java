@@ -93,7 +93,7 @@ public class MaintenanceManager implements MaintenanceService {
 		UpdateCarStatesRequest updateCarStatesRequest = new UpdateCarStatesRequest();
 		updateCarStatesRequest.setCarId(createMaintenanceRequest.getCarId());
 		updateCarStatesRequest.setCarStateName(CarStates.UnderMaintenance);
-		this.carService.updateCarState(updateCarStatesRequest);
+		this.carService.updateCarStates(updateCarStatesRequest);
 
 	}
 

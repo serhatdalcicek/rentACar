@@ -173,13 +173,13 @@ public class RentalManager implements RentalService {
 
     private void updateCarState(int carId, CarStates status) {
 
-        UpdateCarStatesRequest updateCarStateRequest = new UpdateCarStatesRequest();
+        UpdateCarStatesRequest updateCarStatesRequest = new UpdateCarStatesRequest();
 
-        updateCarStateRequest.setCarId(carId);
+        updateCarStatesRequest.setCarId(carId);
 
-        updateCarStateRequest.setCarStateName(status);
+        updateCarStatesRequest.setCarStateName(status);
 
-        this.carService.updateCarState(updateCarStateRequest);
+        this.carService.updateCarStates(updateCarStatesRequest);
 
     }
 

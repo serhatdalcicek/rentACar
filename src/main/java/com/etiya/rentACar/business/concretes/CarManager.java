@@ -55,26 +55,23 @@ public class CarManager implements CarService {
 	}
 
 	@Override
-	public Result updateCarState(UpdateCarStatesRequest updateCarStatesRequest) {
+	public void updateCarStates(UpdateCarStatesRequest updateCarStatesRequest) {
+
 		int carId = updateCarStatesRequest.getCarId();
 		Car car = this.carDao.getById(carId);
-		UpdateCarRequest response = modelMapperService.forRequest().map(car, UpdateCarRequest.class);
-		response.setId(carId);
-		response.setCarStateName(updateCarStatesRequest.getCarStateName());
-		Car result = this.modelMapperService.forRequest().map(response, Car.class);
-		this.carDao.save(result);
-		return new SuccessResult(BusinessMessages.CarMessages.CAR_STATE_UPDATED);
+		car.setCarState(updateCarStatesRequest.getCarStateName());
+		this.carDao.save(car);
+
+
 	}
-
-
 
 	@Override
 	public void updateCarKilometer(UpdateKilometerRequest updateKilometerRequest) {
 		int carId = updateKilometerRequest.getId();
 		Car car = this.carDao.getById(carId);
-		UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
+		UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car, UpdateCarRequest.class);
 		updateCarRequest.setKilometer(updateKilometerRequest.getKilometer());
-		Car result = this.modelMapperService.forRequest().map(updateCarRequest,Car.class);
+		Car result = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
 		this.carDao.save(result);
 	}
 
@@ -82,9 +79,9 @@ public class CarManager implements CarService {
 	public void updateCarCity(UpdateCarCityRequest updateCarCityRequest) {
 		int carId = updateCarCityRequest.getId();
 		Car car = this.carDao.getById(carId);
-		UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
+		UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car, UpdateCarRequest.class);
 		updateCarRequest.setCityId(updateCarCityRequest.getCityId());
-		Car result = this.modelMapperService.forRequest().map(updateCarRequest,Car.class);
+		Car result = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
 		this.carDao.save(result);
 	}
 

@@ -37,11 +37,12 @@ public class MaintenanceManager implements MaintenanceService {
 
 	@Override
 	public Result add(CreateMaintenanceRequest createMaintenanceRequest) {
-		checkIfMaintenanceExists(createMaintenanceRequest);
+		//checkIfMaintenanceExists(createMaintenanceRequest);
+		//TODO:YARIN BAKILACAK
 		Maintenance result = this.modelMapperService.forRequest().map(createMaintenanceRequest, Maintenance.class);
 		this.maintenanceDao.save(result);
 
-		updateCarState(createMaintenanceRequest);
+		//updateCarState(createMaintenanceRequest);
 		return new SuccessResult(BusinessMessages.MaintenanceMessages.MAINTENANCE_ADD);
 	}
 

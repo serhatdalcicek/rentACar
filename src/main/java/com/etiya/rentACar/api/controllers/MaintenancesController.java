@@ -8,6 +8,7 @@ import com.etiya.rentACar.business.responses.maintenanceResponses.ListMaintenanc
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class MaintenancesController {
 
 	private MaintenanceService maintenanceService;
 
-	//@Autowired
+	@Autowired
 	public void MaintenancesControllerController(MaintenanceService maintenanceService) {
 		this.maintenanceService = maintenanceService;
 	}

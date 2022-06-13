@@ -2,12 +2,12 @@ package com.etiya.rentACar.api.controllers;
 
 import com.etiya.rentACar.business.abstracts.PaymentService;
 import com.etiya.rentACar.business.requests.paymentRequests.CreatePaymentRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.etiya.rentACar.business.responses.maintenanceResponses.ListMaintenanceDto;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -21,6 +21,11 @@ public class PaymentsController {
         @PostMapping("/add")
         public void add (@RequestBody @Valid CreatePaymentRequest createPaymentRequest){
             this.paymentService.add(createPaymentRequest);
+
+            @GetMapping("/getAll")
+            public DataResult<List<ListMaintenanceDto>> getAll() {
+                return this.maintenanceService.getAll();
+            }
 
 
     }

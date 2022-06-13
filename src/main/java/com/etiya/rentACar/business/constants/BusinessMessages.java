@@ -2,27 +2,27 @@ package com.etiya.rentACar.business.constants;
 public class BusinessMessages {
 
 	public class MaintenanceMessages {
-		public static final String CAR_UNDERMAINTENANCE = "Bakıma almak istediğiniz araç şu an zaten bakımda!";
-		public static final String MAINTENANCE_ADD = "Araç bakım ekleme işlemi başarıyla gerçekleşti";
-		public static final String MAINTENANCE_DELETED = "Araç bakım silme işlemi başarıyla gerçekleşti";
-		public static final String MAINTENANCE_UPDATED = "Araç bakım güncelleme işlemi başarıyla gerçekleşti";
+		public static final String CAR_UNDERMAINTENANCE = "CAR_UNDERMAINTENANCE";
+		public static final String MAINTENANCE_ADD = "MAINTENANCE_ADD";
+		public static final String MAINTENANCE_DELETED = "MAINTENANCE_DELETED";
+		public static final String MAINTENANCE_UPDATED = "MAINTENANCE_UPDATED";
 	}
 
 	public class RentalMessages {
-		public static final String CAR_RENTED = "Bu araç kirada";
-		public static final String CAR_NOT_AVAILABLE = " Araç kiralanmak için müsait değil";
-		public static final String RENTAL_RETURNED = "Kiralanan araç başarıyla teslim alınmıştır!";
-		public static final String RENTAL_DELETED = "Kiralama kaydı silinmiştir.";
-		public static final String RENTAL_UPDATE = "Kiralama kaydı güncellenmiştir";
-		public static final String RENTAL_ADD = "Kiralama başarıyla eklenmiştir";
-		public static final String RENTAL_NOT_EXIST = "Böyle bir id ile daha önce bir  kiralanma işlemi yoktur. Dolayısıyla teslim alınma söz konusu olamaz!";
+		public static final String CAR_RENTED = "CAR_RENTED";
+		public static final String CAR_NOT_AVAILABLE = "CAR_NOT_AVAILABLE";
+		public static final String RENTAL_RETURNED = "RENTAL_RETURNED";
+		public static final String RENTAL_DELETED = "RENTAL_DELETED";
+		public static final String RENTAL_UPDATE = "RENTAL_UPDATE";
+		public static final String RENTAL_ADD = "RENTAL_ADD";
+		public static final String RENTAL_NOT_EXIST = "RENTAL_NOT_EXIST";
 	}
 
 	public class CityMessages {
-		public static final String CITY_ADD = "şehir eklendi.";
-		public static final String  CITY_DELETED = "şehir silme işlemi başarıyla gerçekleşti";
-		public static final String CITY_UPDATED = "Şehir güncelleme işlemi başarıyla gerçekleşti";
-		public static final String CITY_NAME_EXIST = "Girdiğiniz şehir mevcuttur";
+		public static final String CITY_ADD = "CITY_ADD";
+		public static final String  CITY_DELETED = "CITY_DELETED";
+		public static final String CITY_UPDATED = "CITY_UPDATED";
+		public static final String CITY_NAME_EXIST = "CITY_NAME_EXIST";
 	}
 
 	public class BrandMessages {

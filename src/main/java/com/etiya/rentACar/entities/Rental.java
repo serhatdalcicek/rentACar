@@ -52,8 +52,7 @@ public class Rental {
 
     @OneToMany(mappedBy = "rental")
     private  List<OrderedAdditionalService> orderedAdditionalServices;
-
-
+    
     @OneToMany(mappedBy = "rental")
     private List<Invoice> invoices;
 
